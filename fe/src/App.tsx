@@ -14,6 +14,8 @@ const Feedback = lazy(() => import("./pages/feedback"));
 
 function App() {
   return (
+    <>
+    <Navbar/>
       <Router>
         <Routes>
           <Route path="/" element={<Home/>}  />
@@ -31,7 +33,8 @@ function App() {
             <Route path="/teamchat" element={<TeamChat/>}></Route>
 
         </Routes>
-      </Router>   
+      </Router>
+      </>   
   )
 }
 
