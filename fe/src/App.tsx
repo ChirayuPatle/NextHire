@@ -5,6 +5,8 @@ import Home from "./pages/home";
 import Header from "./header";
 import Notifications from "./pages/notification";
 import Navbar from "./pages/navbar";
+import Login from "./pages/login";
+import Settings from "./pages/setting";
 
 const Feedback = lazy(() => import("./pages/feedback"));
 
@@ -21,6 +23,8 @@ function App() {
             <Route path="/header" element={<Header/>}></Route>
             <Route path="/notification" element={<Notifications/>}></Route>
             <Route path="/navbar" element={<Navbar/>}></Route>
+            <Route path="/login" element={<Login/>}></Route>
+            <Route path="/setting" element={<Settings/>}></Route>
         </Routes>
       </Router>   
   )
