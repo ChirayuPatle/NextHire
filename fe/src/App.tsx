@@ -4,7 +4,9 @@ import Layout from "./layout"
 function App() {
   return (
     <>
+    <div className="bg-zinc-950 text-white">
     <Layout />
+    </div>
     </>
   )
 }
