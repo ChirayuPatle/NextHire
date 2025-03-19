@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Loader from "./components/ui/loader";
 import Home from "./pages/home";
 import Header from "./header";
+import Notifications from "./pages/notification";
 
 const Feedback = lazy(() => import("./pages/feedback"));
 
@@ -17,6 +18,7 @@ function App() {
             </Suspense>
             } />
             <Route path="/header" element={<Header/>}></Route>
+            <Route path="/notification" element={<Notifications/>}></Route>
         </Routes>
       </Router>   
   )

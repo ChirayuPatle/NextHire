@@ -26,7 +26,10 @@ const Header: React.FC = () => {
         } md:translate-x-0 transition-transform duration-300 ease-in-out`}
       >
         {/* Sidebar Header */}
-        <h2 className="text-xl font-semibold">Dashboard</h2>
+        <div className="flex flex-row space-x-4">
+          <img src="" alt="" className="w-8 h-8" />
+        <h2 className="text-xl font-semibold">NEXTHIRE</h2>
+        </div>
 
         {/* Navigation Links */}
         <nav>
