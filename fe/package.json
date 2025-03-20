@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@codesandbox/sdk": "^0.11.1",
+    "@cometchat-pro/chat": "^3.0.13",
     "@radix-ui/react-slot": "^1.1.2",
     "@stackblitz/sdk": "^1.11.0",
     "@tailwindcss/vite": "^4.0.14",
     "@vitejs/plugin-react": "^4.3.4",
+    "@zegocloud/zego-uikit-prebuilt": "^2.14.1-beta",
     "axios": "^1.8.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

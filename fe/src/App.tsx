@@ -1,18 +1,18 @@
 import { lazy, Suspense } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Loader from "./components/ui/loader";
 import Header from "./header";
+import AiChat from "./pages/aiChat";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Navbar from "./pages/navbar";
 import Notifications from "./pages/notification";
 import Settings from "./pages/setting";
-import AiChat from "./pages/aiChat";
 import TeamChat from "./pages/teamChat";
-import Quiz from "./pages/interRound1";
 
-import FeedbackPage from "./pages/feedback";
 import CodeEditor from "./pages/code/code-editor";
+import FeedbackPage from "./pages/feedback";
+import VideoRoom from "./pages/video/video-room";
 
 
 const Feedback = lazy(() => import("./pages/feedback"));
@@ -21,7 +21,6 @@ function App() {
   return (
     <>
     <Navbar/>
-      <Router>
         <Routes>
           <Route path="/" element={<Home/>}  />
           <Route path="/feedback" element={
@@ -38,8 +37,8 @@ function App() {
             <Route path="/teamchat" element={<TeamChat/>}></Route>
             <Route path="/feedback" element={<FeedbackPage />}></Route>
             <Route path="/code" element={<CodeEditor />} ></Route>
+            <Route path="/room/:roomId" element={<VideoRoom />} ></Route>
         </Routes>
-      </Router>
       </>   
   )
 }
