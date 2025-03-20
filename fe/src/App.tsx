@@ -1,11 +1,11 @@
 import { lazy, Suspense } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Loader from "./components/ui/loader";
-import Home from "./pages/home";
 import Header from "./header";
-import Notifications from "./pages/notification";
-import Navbar from "./pages/navbar";
+import Home from "./pages/home";
 import Login from "./pages/login";
+import Navbar from "./pages/navbar";
+import Notifications from "./pages/notification";
 import Settings from "./pages/setting";
 import AiChat from "./pages/aiChat";
 import TeamChat from "./pages/teamChat";
@@ -18,12 +18,12 @@ const Feedback = lazy(() => import("./pages/feedback"));
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/feedback"
-          element={
+    <>
+    <Navbar/>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home/>}  />
+          <Route path="/feedback" element={
             <Suspense fallback={<Loader />}>
               <Feedback />
             </Suspense>
@@ -37,7 +37,8 @@ function App() {
             <Route path="/teamchat" element={<TeamChat/>}></Route>
             <Route path="/feedback" element={<FeedbackPage />}></Route>
         </Routes>
-      </Router>   
+      </Router>
+      </>   
   )
 }
 

@@ -5,6 +5,7 @@ import env from './configs/env-config';
 import { OK } from './configs/http-status-codes';
 import errorHandler from './middlewares/error-handler';
 import catchErrors from './utils/catch-errors';
+import codeSandBoxRouter from './routes/code.routes';
 
 // Routes Imports
 
@@ -38,6 +39,8 @@ app.get(
     });
   }),
 );
+
+app.use('/api/v1', codeSandBoxRouter);
 
 /// Error handler middleware
 
