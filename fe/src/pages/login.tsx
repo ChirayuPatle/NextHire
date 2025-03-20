@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Mail, Lock, Linkedin, LogIn } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Login: React.FC = () => {
   // State for email and password
@@ -78,12 +79,14 @@ const Login: React.FC = () => {
               </div>
 
               {/* Create Account Button */}
+              <Link to={''}>
               <button
                 type="submit"
                 className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg flex items-center justify-center transition shadow-md hover:shadow-lg"
               >
                 <LogIn size={20} className="mr-2" /> Create Account
               </button>
+              </Link>
             </form>
           </div>
         </div>

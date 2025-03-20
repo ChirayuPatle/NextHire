@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Home, Users, MessageSquare, BarChart, Settings } from "lucide-react";
+import { Menu, X, LayoutDashboard, Users, MessageSquare, BarChart, Settings } from "lucide-react";
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,17 +28,17 @@ const Header: React.FC = () => {
         {/* Sidebar Header */}
         <div className="flex flex-row space-x-4">
           <img src="" alt="" className="w-8 h-8" />
-        <h2 className="text-xl font-semibold">NEXTHIRE</h2>
+          <h2 className="text-xl font-semibold">NEXTHIRE</h2>
         </div>
 
         {/* Navigation Links */}
         <nav>
           <ul className="space-y-4">
-            <SidebarItem to="/" icon={<Home size={20} />} label="Home" />
-            <SidebarItem to="/team" icon={<Users size={20} />} label="Team" />
-            <SidebarItem to="/chat" icon={<MessageSquare size={20} />} label="Chat" />
+            <SidebarItem to="/dashboard" icon={<LayoutDashboard size={20} />} label="Dashboard" />
+            <SidebarItem to="/teamdetail" icon={<Users size={20} />} label="Team" />
+            <SidebarItem to="/teamchat" icon={<MessageSquare size={20} />} label="Chat" />
             <SidebarItem to="/analysis" icon={<BarChart size={20} />} label="Analysis" />
-            <SidebarItem to="/settings" icon={<Settings size={20} />} label="Settings" />
+            <SidebarItem to="/setting" icon={<Settings size={20} />} label="Settings" />
           </ul>
         </nav>
       </aside>
