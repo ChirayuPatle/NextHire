@@ -7,6 +7,8 @@ import Notifications from "./pages/notification";
 import Navbar from "./pages/navbar";
 import Login from "./pages/login";
 import Settings from "./pages/setting";
+import AiChat from "./pages/aiChat";
+import TeamChat from "./pages/teamChat";
 
 const Feedback = lazy(() => import("./pages/feedback"));
 
@@ -25,7 +27,9 @@ function App() {
             <Route path="/navbar" element={<Navbar/>}></Route>
             <Route path="/login" element={<Login/>}></Route>
             <Route path="/setting" element={<Settings/>}></Route>
-            <Route path="/aichat" element={<AiChat/>}></Route>
+          <Route path="/aichat" element={<AiChat/>}></Route>
+            <Route path="/teamchat" element={<TeamChat/>}></Route>
+
         </Routes>
       </Router>   
   )
