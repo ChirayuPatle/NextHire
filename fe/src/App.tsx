@@ -25,6 +25,7 @@ function App() {
             <Route path="/navbar" element={<Navbar/>}></Route>
             <Route path="/login" element={<Login/>}></Route>
             <Route path="/setting" element={<Settings/>}></Route>
+            <Route path="/aichat" element={<AiChat/>}></Route>
         </Routes>
       </Router>   
   )
