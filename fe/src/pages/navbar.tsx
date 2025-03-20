@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Bell, Menu, Search, User, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -7,7 +8,9 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-gray-900 text-white p-4 flex items-center justify-between">
       {/* Left: Brand Title */}
+      <Link to={'/dashboard'}>
       <h1 className="text-2xl font-bold">NEXTHIRE</h1>
+      </Link>
 
       {/* Right: Search Bar, Icons (Hidden on Mobile) */}
       <div className="hidden md:flex items-center space-x-4">
@@ -22,8 +25,12 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Notification & Profile Icons */}
+        <Link to={'/notification'}>
         <Bell className="cursor-pointer hover:text-gray-400" size={24} />
+        </Link>
+        <Link to={'/create-profile'}>
         <User className="cursor-pointer hover:text-gray-400" size={24} />
+        </Link>
       </div>
 
       {/* Mobile Menu Button */}
