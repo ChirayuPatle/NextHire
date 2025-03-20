@@ -9,6 +9,7 @@ import Login from "./pages/login";
 import Settings from "./pages/setting";
 import AiChat from "./pages/aiChat";
 import TeamChat from "./pages/teamChat";
+import Quiz from "./pages/interRound1";
 
 const Feedback = lazy(() => import("./pages/feedback"));
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/setting" element={<Settings/>}></Route>
             <Route path="/aichat" element={<AiChat/>}></Route>
             <Route path="/teamchat" element={<TeamChat/>}></Route>
+            <Route path="/roundone" element={<Quiz/>}></Route>
         </Routes>
       </Router>   
   )
