@@ -9,6 +9,7 @@ const getEnv = (key: string, defaultValue?: string): string => {
 export const env = {
   PORT: getEnv('PORT'),
   NODE_ENV: getEnv('NODE_ENV'),
+  CSB_API_KEY: getEnv('CSB_API_KEY'),
 };
 
 export default env;
