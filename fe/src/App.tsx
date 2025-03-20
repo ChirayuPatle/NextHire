@@ -11,14 +11,19 @@ import AiChat from "./pages/aiChat";
 import TeamChat from "./pages/teamChat";
 import Quiz from "./pages/interRound1";
 
+import FeedbackPage from "./pages/feedback";
+
+
 const Feedback = lazy(() => import("./pages/feedback"));
 
 function App() {
   return (
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home/>}  />
-          <Route path="/feedback" element={
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/feedback"
+          element={
             <Suspense fallback={<Loader />}>
               <Feedback />
             </Suspense>
@@ -28,12 +33,12 @@ function App() {
             <Route path="/navbar" element={<Navbar/>}></Route>
             <Route path="/login" element={<Login/>}></Route>
             <Route path="/setting" element={<Settings/>}></Route>
-            <Route path="/aichat" element={<AiChat/>}></Route>
+          <Route path="/aichat" element={<AiChat/>}></Route>
             <Route path="/teamchat" element={<TeamChat/>}></Route>
-            <Route path="/roundone" element={<Quiz/>}></Route>
+            <Route path="/feedback" element={<FeedbackPage />}></Route>
         </Routes>
       </Router>   
   )
 }
 
-export default App
+export default App;
