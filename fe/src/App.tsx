@@ -7,9 +7,11 @@ import Notifications from "./pages/notification";
 import Navbar from "./pages/navbar";
 import Login from "./pages/login";
 import Settings from "./pages/setting";
-import FeedbackPage from "./pages/feedback";
 import AiChat from "./pages/aiChat";
 import TeamChat from "./pages/teamChat";
+import Quiz from "./pages/interRound1";
+
+import FeedbackPage from "./pages/feedback";
 
 
 const Feedback = lazy(() => import("./pages/feedback"));
