@@ -1,11 +1,11 @@
 import { lazy, Suspense } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Loader from "./components/ui/loader";
-import Home from "./pages/home";
 import Header from "./header";
-import Notifications from "./pages/notification";
-import Navbar from "./pages/navbar";
+import Home from "./pages/home";
 import Login from "./pages/login";
+import Navbar from "./pages/navbar";
+import Notifications from "./pages/notification";
 import Settings from "./pages/setting";
 import AiChat from "./pages/aiChat";
 import TeamChat from "./pages/teamChat";
