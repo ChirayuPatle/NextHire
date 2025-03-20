@@ -4,7 +4,6 @@
     "": {
       "name": "be",
       "dependencies": {
-        "@codesandbox/sdk": "^0.11.1",
         "cookie-parser": "^1.4.7",
         "cors": "^2.8.5",
         "express": "^4.21.2",
@@ -22,8 +21,6 @@
     },
   },
   "packages": {
-    "@codesandbox/sdk": ["@codesandbox/sdk@0.11.1", "", { "bin": { "csb": "dist/bin/codesandbox.cjs" } }, "sha512-MKil+626cDuHOZTuHukAVgOyk3GIogDXLJPnPpCTQNwVq49UaEN6BlkEIuWmSOWE09X66lbXmuU96lJKUJ4aDA=="],
-
     "@types/body-parser": ["@types/body-parser@1.19.5", "", { "dependencies": { "@types/connect": "*", "@types/node": "*" } }, "sha512-fB3Zu92ucau0iQ0JMCFQE7b/dv8Ot07NI3KaZIkIUNXq82k4eBAqUaneXfleGY9JWskeS9y+u0nXMyspcuQrCg=="],
 
     "@types/bun": ["@types/bun@1.2.5", "", { "dependencies": { "bun-types": "1.2.5" } }, "sha512-w2OZTzrZTVtbnJew1pdFmgV99H0/L+Pvw+z1P67HaR18MHOzYnTYOi6qzErhK8HyT+DB782ADVPPE92Xu2/Opg=="],

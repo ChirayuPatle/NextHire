@@ -1,45 +1,67 @@
-import { useState } from 'react';
+import sdk from "@stackblitz/sdk";
+import { useEffect, useRef } from "react";
 
-function App() {
-  const [sandboxId, setSandboxId] = useState(null);
+function CodeEditor() {
+  const embedRef = useRef(null);
 
-  const createSandbox = async () => {
-    try {
-      const response = await fetch('http://localhost:8000/api/v1/create-sandbox', {
-        method: 'POST',
-      });
-      const data = await response.json();
-      setSandboxId(data.id);
-    } catch (error) {
-      console.error('Error creating sandbox:', error);
-    }
-  };
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (embedRef.current) {
+        sdk.embedProject(embedRef.current, {
+          title: "React Sandbox",
+          description: "A simple React app using StackBlitz SDK",
+          template: "create-react-app",
+          dependencies: {
+            react: "latest",
+            "react-dom": "latest",
+          },
+          files: {
+            "index.js": `
+              import React from 'react';
+              import ReactDOM from 'react-dom';
+              import App from './App';
+              ReactDOM.render(<App />, document.getElementById('root'));
+            `,
+            "App.js": `
+              import React from 'react';
+              function App() {
+                return <h1>Hello from StackBlitz!</h1>;
+              }
+              export default App;
+            `,
+            "index.html": `
+              <!DOCTYPE html>
+              <html lang="en">
+              <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>React App</title>
+              </head>
+              <body>
+                <div id="root"></div>
+              </body>
+              </html>
+            `,
+            "package.json": JSON.stringify({
+              dependencies: {
+                react: "latest",
+                "react-dom": "latest",
+              },
+              main: "index.js",
+            }),
+          },
+        });
+      }
+    }, 500); // Delay ensures the DOM element is available
+
+    return () => clearTimeout(timeout); // Cleanup
+  }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="p-8 bg-white rounded shadow-md">
-        <h1 className="text-2xl font-bold mb-4">CodeSandbox SDK Example</h1>
-        <button
-          onClick={createSandbox}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Create New Sandbox
-        </button>
-        {sandboxId && (
-          <p className="mt-4">
-            New sandbox created with ID:{' '}
-            <a
-              href={`https://codesandbox.io/s/${sandboxId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {sandboxId}
-            </a>
-          </p>
-        )}
-      </div>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
+      <div ref={embedRef} className="w-full h-screen border rounded shadow-lg bg-white"></div>
     </div>
   );
 }
 
-export default App;
+export default CodeEditor;

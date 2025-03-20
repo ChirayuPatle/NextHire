@@ -12,6 +12,7 @@ import TeamChat from "./pages/teamChat";
 import Quiz from "./pages/interRound1";
 
 import FeedbackPage from "./pages/feedback";
+import CodeEditor from "./pages/code/code-editor";
 
 
 const Feedback = lazy(() => import("./pages/feedback"));
@@ -36,6 +37,7 @@ function App() {
           <Route path="/aichat" element={<AiChat/>}></Route>
             <Route path="/teamchat" element={<TeamChat/>}></Route>
             <Route path="/feedback" element={<FeedbackPage />}></Route>
+            <Route path="/code" element={<CodeEditor />} ></Route>
         </Routes>
       </Router>
       </>   

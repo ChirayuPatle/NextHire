@@ -3,15 +3,6 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
-  "scripts": {
-    "dev": "bun --hot run ./src/server.ts",
-		"build": "bunx tsc",
-		"lint:check": "eslint src/**/*.ts",
-		"lint:fix": "eslint src/**/*.ts --fix",
-		"format:check": "prettier --check .",
-		"format:write": "prettier --write .",
-		"pre-commit": "bun run lint:fix && bun run format:write"
-  },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/cookie-parser": "^1.4.8",
@@ -22,7 +13,6 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@codesandbox/sdk": "^0.11.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "express": "^4.21.2",
