@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="px-14 py-4" >
       This is home page
       <Button onClick={() => navigate("/feedback")} >Click me</Button>
     </div>

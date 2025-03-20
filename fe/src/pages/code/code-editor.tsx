@@ -8,10 +8,27 @@ function CodeEditor() {
     const timeout = setTimeout(() => {
       if (embedRef.current) {
         sdk.embedProject(embedRef.current, {
-          title: "{Company_Name}",
-          description: "Welcome to {Company_Name} {Session_Name} ",
-          template: "html",
+          title: "React Sandbox",
+          description: "A simple React app using StackBlitz SDK",
+          template: "create-react-app",
+          dependencies: {
+            react: "latest",
+            "react-dom": "latest",
+          },
           files: {
+            "index.js": `
+              import React from 'react';
+              import ReactDOM from 'react-dom';
+              import App from './App';
+              ReactDOM.render(<App />, document.getElementById('root'));
+            `,
+            "App.js": `
+              import React from 'react';
+              function App() {
+                return <h1>Hello from StackBlitz!</h1>;
+              }
+              export default App;
+            `,
             "index.html": `
               <!DOCTYPE html>
               <html lang="en">
@@ -25,7 +42,13 @@ function CodeEditor() {
               </body>
               </html>
             `,
-           
+            "package.json": JSON.stringify({
+              dependencies: {
+                react: "latest",
+                "react-dom": "latest",
+              },
+              main: "index.js",
+            }),
           },
         });
       }
@@ -35,7 +58,7 @@ function CodeEditor() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center ">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
       <div ref={embedRef} className="w-full h-screen border rounded shadow-lg bg-white"></div>
     </div>
   );
