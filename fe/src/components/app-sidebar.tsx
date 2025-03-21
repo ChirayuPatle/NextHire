@@ -6,6 +6,7 @@ import {
   Users
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { useState } from "react"; 
 
 import {
   Sidebar,
@@ -30,6 +31,16 @@ const menuItems = [
 
 export function AppSidebar() {
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(true); 
+
+  const handleMenuClick = () => {
+    if (window.innerWidth < 768) {
+      setIsOpen(false);
+    }
+  };
+
+  return (
+    <Sidebar className={`h-screen w-64 text-white ${isOpen ? "block" : "hidden"} md:block`}>
 
   return (
     <Sidebar className="h-screen w-64 text-white">
@@ -53,6 +64,7 @@ export function AppSidebar() {
                         to={item.url}
                         className={`flex items-center gap-3 p-2 rounded-lg transition-colors duration-300 
                           ${isActive ? "bg-gray-200 text-black font-semibold" : "text-gray-400 hover:bg-gray-800 hover:text-white"}`}
+                        onClick={handleMenuClick} // Close sidebar on mobile click
                       >
                         <item.icon className={`w-5 h-5 transition-colors duration-300 
                           ${isActive ? "text-black" : "text-gray-500 group-hover:text-white"}`} />
