@@ -58,7 +58,7 @@ function CodeEditor() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <div ref={embedRef} className="w-full h-screen border rounded shadow-lg bg-white"></div>
     </div>
   );

@@ -1,9 +1,17 @@
 import { useState } from "react";
 import { Bell, Menu, Search, User, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+
+  const loc = useLocation();
+
+  console.log(loc)
+
+  if(loc.pathname.includes("/")) {
+    return null;
+  }
 
   return (
     <nav className="bg-gray-900 text-white p-4 flex items-center justify-between">
