@@ -8,7 +8,7 @@ import CodeEditor from "./pages/code/code-editor";
 import Dashboard, { CandidateDashboard } from "./pages/dashboard/dashboard";
 import Home from "./pages/home";
 import Quiz from "./pages/interRound1";
-import Login from "./pages/login";
+import Login from "./pages/auth/page";
 import Navbar from "./pages/navbar";
 import Notifications from "./pages/notification";
 import Settings from "./pages/setting";

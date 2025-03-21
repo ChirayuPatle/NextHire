@@ -52,14 +52,14 @@ const Index = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12 animate-slide-in">
-            <Link to="/auth?type=register&role=organization">
-              <Button variant="primary" size="lg" className="w-full sm:w-auto">
+            <Link to="/login">
+              <Button variant="primary" size="lg" className=" hover:underline hover:underline-offset-4 cursor-pointer w-full sm:w-auto">
                 For Organizations
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-            <Link to="/auth?type=register&role=candidate">
-              <Button variant="outline" size="lg" className="w-full sm:w-auto">
+            <Link to="/login">
+              <Button variant="outline" size="lg" className=" group hover:bg-[#B967FF]/20 hover:border-transparent cursor-pointer w-full sm:w-auto">
                 For Candidates
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
