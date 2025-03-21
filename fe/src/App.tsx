@@ -9,7 +9,6 @@ import Navbar from "./pages/navbar";
 import Login from "./pages/login";
 import Settings from "./pages/setting";
 import TeamChat from "./pages/teamChat";
-
 import CodeEditor from "./pages/code/code-editor";
 import VideoRoom from "./pages/video/video-room";
 import Quiz from "./pages/interRound1";

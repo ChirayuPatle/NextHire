@@ -6,7 +6,6 @@ const NextHire: React.FC = () => {
     <div className="bg-black text-white min-h-screen">
       {/* Navbar */}
       <nav className="flex justify-between items-center p-6">
-        <h1 className="text-2xl font-bold">NextHire</h1>
         <Link to={'/login'}>
         <button className="bg-purple-600 px-4 py-2 rounded-lg">Sign Up</button>
         </Link>

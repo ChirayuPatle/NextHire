@@ -351,9 +351,6 @@ const FeedbackPage: React.FC = () => {
             >
               {submitting ? "Submitting..." : "Submit Feedback"}
             </Button>
-            <p className="text-center text-gray-500 text-sm mt-3">
-              Powered by NextHire
-            </p>
           </div>
         </div>
       </div>
