@@ -37,7 +37,7 @@ const Index = () => {
       {/* Hero Section */}
       <section 
         ref={heroRef}
-        className="pt-28 pb-20 md:pt-32 md:pb-24 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl relative overflow-hidden"
+        className="pt-28 pb-20 md:pt-32 md:pb-24 px-4 sm:px-6 lg:px-8 mx-auto w-full relative overflow-hidden"
       >
         <div className="absolute top-0 left-0 right-0 h-full bg-gradient-to-b from-[#B967FF]/10 to-transparent opacity-70 pointer-events-none"></div>
         

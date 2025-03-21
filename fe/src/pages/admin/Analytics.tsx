@@ -1,7 +1,7 @@
 
 import { useApp } from "@/context/AppContext";
-import AppLayout from "@/components/layout/AppLayout";
-import Card from "@/components/ui-custom/Card";
+import AppLayout from "@/components/layouts/AppLayout";
+import Card from "@/components/ui-custom/card";
 import { 
   AreaChart, 
   Area, 

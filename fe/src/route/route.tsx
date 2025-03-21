@@ -10,8 +10,8 @@ import Feedback from "@/pages/feedback";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
-      <Route index element={<Home />} />
+    <Route path="/" element={<Home />}>
+      <Route index element={<Header />} />
       <Route path="feedback" element={<Feedback />} />
       <Route path="header" element={<Header />} />
     </Route>

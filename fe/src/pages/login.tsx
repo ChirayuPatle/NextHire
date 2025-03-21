@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Mail, Lock, Linkedin, LogIn } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useAsyncError, useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   // State for email and password
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
 
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
@@ -79,9 +80,8 @@ const Login: React.FC = () => {
               </div>
 
               {/* Create Account Button */}
-              <Link to={''}>
+              <Link to={'/dashboard'}>
               <button
-                type="submit"
                 className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg flex items-center justify-center transition shadow-md hover:shadow-lg"
               >
                 <LogIn size={20} className="mr-2" /> Create Account

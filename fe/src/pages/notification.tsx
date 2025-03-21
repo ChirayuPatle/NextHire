@@ -22,7 +22,7 @@ const Notifications: React.FC = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-900 min-h-screen text-white flex flex-col items-center">
+    <div className="p-6 min-h-screen text-white flex flex-col items-center">
       <h1 className="text-2xl font-semibold mb-4 flex items-center">
         <Bell className="mr-2" /> Notifications
       </h1>
@@ -40,14 +40,14 @@ const Notifications: React.FC = () => {
       {/* Notifications List */}
       <div className="w-full max-w-md">
         {notifications.length === 0 ? (
-          <p className="text-gray-400">No new notifications</p>
+          <p className="text-neutral-400">No new notifications</p>
         ) : (
           <ul className="space-y-3">
             {notifications.map((notification) => (
               <li
                 key={notification.id}
                 className={`p-3 rounded-md flex items-center justify-between ${
-                  notification.read ? "bg-gray-800 text-gray-500" : "bg-gray-700"
+                  notification.read ? "bg-neutral-800 text-neutral-500" : "bg-neutral-700"
                 }`}
               >
                 <span>{notification.message}</span>
