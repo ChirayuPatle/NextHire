@@ -3,20 +3,20 @@ import { Route, Routes } from "react-router-dom";
 import Loader from "./components/ui/loader";
 import AiChat from "./pages/aiChat";
 import Home from "./pages/home";
-import Header from "./header";
+import Header from "./menubar";
 import Notifications from "./pages/notification";
 import Navbar from "./pages/navbar";
 import Login from "./pages/login";
 import Settings from "./pages/setting";
 import TeamChat from "./pages/teamChat";
-
+import Layout from "@/layouts/dashboard-layout"
 import CodeEditor from "./pages/code/code-editor";
 import VideoRoom from "./pages/video/video-room";
 import Quiz from "./pages/interRound1";
 import NextHire from "./pages/home";
 import About from "./pages/about";
 import FeedbackPage from "./pages/feedback";
-import Dashboard from "./pages/dashboard";
+import Dashboard from "./pages/dashboard/dashboard";
 import TeamDetails from "./pages/teamDetails";
 import Analysis from "./pages/analysis";
 import UserProfile from "./pages/userProfile";
@@ -48,10 +48,21 @@ function App() {
             <Route path="/roundone" element={<Quiz />}></Route>
             <Route path="/home" element={<NextHire />}></Route>
             <Route path="/about" element={<About />}></Route>
-            <Route path="/dashboard" element={<Dashboard />}></Route>
             <Route path="/teamdetail" element={<TeamDetails />}></Route>
             <Route path="/analysis" element={<Analysis />}></Route>
             <Route path="/create-profile" element={<UserProfile />}></Route>
+
+            {/* Dashboard Routes */}
+             <Route path="/dashboard/*" element={<Layout />}>
+                <Route index element={<Dashboard />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="team" element={<TeamDetails />} />
+                <Route path="analysis" element={<Analysis />} />
+                <Route path="profile" element={<UserProfile />} />
+            </Route>
+            
+              
+
         </Routes>
         </>
   )
