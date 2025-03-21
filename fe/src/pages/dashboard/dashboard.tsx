@@ -50,7 +50,7 @@ const AdminDashboard = () => {
       
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <Card variant="glass" padding="lg" className="flex items-center">
+        <Card variant="glass" padding="lg" className="flex bg-neutral-800 border-none items-center">
           <div className="p-3 rounded-full bg-[#B967FF]/20 mr-4">
             <Calendar className="h-6 w-6 text-[#B967FF]" />
           </div>
@@ -60,7 +60,7 @@ const AdminDashboard = () => {
           </div>
         </Card>
         
-        <Card variant="glass" padding="lg" className="flex items-center">
+        <Card variant="glass" padding="lg" className="flex bg-neutral-800 border-none items-center">
           <div className="p-3 rounded-full bg-[#B967FF]/20 mr-4">
             <Users className="h-6 w-6 text-[#B967FF]" />
           </div>
@@ -70,17 +70,17 @@ const AdminDashboard = () => {
           </div>
         </Card>
         
-        <Card variant="glass" padding="lg" className="flex items-center">
+        <Card variant="glass" padding="lg" className="flex bg-neutral-800 border-none items-center">
           <div className="p-3 rounded-full bg-[#B967FF]/20 mr-4">
             <CheckCircle className="h-6 w-6 text-[#B967FF]" />
           </div>
-          <div>
+          <div  >
             <p className="text-[#ABABAB] text-sm">Tests Completed</p>
             <p className="text-2xl font-bold text-white">{analytics?.testsCompletedCount || 0}</p>
           </div>
         </Card>
         
-        <Card variant="glass" padding="lg" className="flex items-center">
+        <Card variant="glass" padding="lg" className="flex bg-neutral-800 border-none items-center">
           <div className="p-3 rounded-full bg-[#B967FF]/20 mr-4">
             <Clock className="h-6 w-6 text-[#B967FF]" />
           </div>
@@ -96,7 +96,7 @@ const AdminDashboard = () => {
         <div className="lg:col-span-2">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-white">Active Sessions</h2>
-            <Link to="/sessions">
+            <Link to="/sessions" className="bg-neutral-800 border-none" >
               <Button variant="outline" size="sm">
                 <Plus className="h-4 w-4 mr-2" />
                 Create Session
@@ -109,7 +109,7 @@ const AdminDashboard = () => {
               .filter(session => session.status === "active")
               .slice(0, 3)
               .map((session) => (
-                <Card key={session.id} isHoverable className="transition-all duration-300">
+                <Card key={session.id} isHoverable className="transition-all bg-neutral-800 duration-300">
                   <div className="flex flex-col md:flex-row justify-between">
                     <div>
                       <div className="flex items-center mb-2">
@@ -191,7 +191,7 @@ const AdminDashboard = () => {
               <input 
                 type="text" 
                 placeholder="Search candidates" 
-                className="w-full pl-10 bg-transparent border border-[#2F2F2F] rounded-lg p-2 text-white"
+                className="w-full pl-10 bg-transparent border border-[#5e5e5e] rounded-lg p-2 text-white"
               />
             </div>
             
@@ -258,7 +258,7 @@ export const CandidateDashboard = () => {
       
       {/* Action Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <Card className="relative overflow-hidden border border-[#2F2F2F]/20">
+        <Card className="relative overflow-hidden border border-[#5a5959]">
           <div className="absolute top-0 right-0 w-24 h-24 -mt-10 -mr-10 bg-[#B967FF]/10 rounded-full"></div>
           <div className="absolute top-0 right-0 w-16 h-16 -mt-4 -mr-4 bg-[#B967FF]/20 rounded-full"></div>
           
@@ -277,7 +277,7 @@ export const CandidateDashboard = () => {
           </div>
         </Card>
         
-        <Card className="relative overflow-hidden border border-[#2F2F2F]/20">
+        <Card className="relative overflow-hidden border border-[#5a5959]">
           <div className="absolute top-0 right-0 w-24 h-24 -mt-10 -mr-10 bg-[#B967FF]/10 rounded-full"></div>
           <div className="absolute top-0 right-0 w-16 h-16 -mt-4 -mr-4 bg-[#B967FF]/20 rounded-full"></div>
           
@@ -296,7 +296,7 @@ export const CandidateDashboard = () => {
           </div>
         </Card>
         
-        <Card className="relative overflow-hidden border border-[#2F2F2F]/20">
+        <Card className="relative overflow-hidden border border-[#5a5959]">
           <div className="absolute top-0 right-0 w-24 h-24 -mt-10 -mr-10 bg-[#B967FF]/10 rounded-full"></div>
           <div className="absolute top-0 right-0 w-16 h-16 -mt-4 -mr-4 bg-[#B967FF]/20 rounded-full"></div>
           
@@ -330,7 +330,7 @@ export const CandidateDashboard = () => {
             {[1, 2].map((interview) => (
               <div 
                 key={interview}
-                className="border-b border-[#2F2F2F]/20 last:border-b-0 py-4 first:pt-0 last:pb-0"
+                className="border-b border-[#5a5959] last:border-b-0 py-4 first:pt-0 last:pb-0"
               >
                 <div className="flex flex-col md:flex-row justify-between mb-2">
                   <div>
