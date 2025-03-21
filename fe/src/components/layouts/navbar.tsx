@@ -122,7 +122,7 @@ const Navbar = ({
             </>
           ) : (
             <>
-              <Link to="/login" className="button-primary border-[1px] p-2 px-4 border-zinct-600 rounded-lg hover:opacity-[.7] text-center  ">Sign Up</Link>
+              <Link to="/login" className="button-primary border-[1px] p-2 px-4 border-zinct-600 rounded-lg hover:opacity-[.7] text-center hover:bg-[#B967FF]/20 hover:border-transparent cursor-pointer ">Sign Up</Link>
             </>
           )}
         </div>
