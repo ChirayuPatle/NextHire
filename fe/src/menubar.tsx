@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, LayoutDashboard, Users, MessageSquare, BarChart, Settings } from "lucide-react";
 
-const Header: React.FC = () => {
+const Menubar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -21,8 +21,8 @@ const Header: React.FC = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full bg-gray-900 text-white w-64 p-5 space-y-6 transform ${
-          isOpen ? "translate-x-0" : "-translate-x-64"
+        className={`fixed top-0 left-0 h-full bg-gray-900 text-white w-[14.5rem] p-5 space-y-6 transform ${
+          isOpen ? "translate-x-0" : "-translate-x-w-[14.5rem]"
         } md:translate-x-0 transition-transform duration-300 ease-in-out`}
       >
         {/* Sidebar Header */}
@@ -68,4 +68,4 @@ const SidebarItem: React.FC<{ to: string; icon: React.ReactNode; label: string }
   </li>
 );
 
-export default Header;
+export default Menubar;
