@@ -9,6 +9,8 @@ const getEnv = (key: string, defaultValue?: string): string => {
 export const env = {
   PORT: getEnv('PORT'),
   NODE_ENV: getEnv('NODE_ENV'),
+  GEMINI_API_KEY: getEnv('GEMINI_API_KEY'),
+  GEMINI_PROJECT_NUMBER: getEnv('GEMINI_PROJECT_NUMBER'),
 };
 
 export default env;

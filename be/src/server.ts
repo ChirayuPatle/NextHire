@@ -7,7 +7,7 @@ import errorHandler from './middlewares/error-handler';
 import catchErrors from './utils/catch-errors';
 
 // Routes Imports
-
+import geminiChatBotRouter from './routes/geminiai.routes';
 // Env variable
 const PORT = env.PORT;
 const NODE_ENV = env.NODE_ENV;
@@ -24,7 +24,7 @@ app.use(
 app.use(
   cors({
     //TODO: need to add ORIGIN_URL of our frontend
-    origin: `*`,
+    origin: `http://localhost:5173`,
     credentials: true,
   }),
 );
@@ -38,6 +38,8 @@ app.get(
     });
   }),
 );
+
+app.use('/api/ai', geminiChatBotRouter);
 
 /// Error handler middleware
 
