@@ -34,6 +34,12 @@ const Navbar = ({
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  const loc = useLocation();
+
+  if(loc.pathname.includes("/dashboard")){
+    return null;
+  }
   
   return (
     <nav 
@@ -116,13 +122,7 @@ const Navbar = ({
             </>
           ) : (
             <>
-              <Link to="/" className={cn("nav-link", location.pathname === "/" && "text-nexthire-purple")}>Home</Link>
-              <Link to="/features" className={cn("nav-link", location.pathname === "/features" && "text-nexthire-purple")}>Features</Link>
-              <Link to="/pricing" className={cn("nav-link", location.pathname === "/pricing" && "text-nexthire-purple")}>Pricing</Link>
-              <Link to="/about" className={cn("nav-link", location.pathname === "/about" && "text-nexthire-purple")}>About</Link>
-              <Link to="/contact" className={cn("nav-link", location.pathname === "/contact" && "text-nexthire-purple")}>Contact</Link>
-              <Link to="/auth?type=login" className="button-secondary">Login</Link>
-              <Link to="/auth?type=register" className="button-primary">Sign Up</Link>
+              <Link to="/login" className="button-primary border-[1px] p-2 px-4 border-zinct-600 rounded-lg hover:opacity-[.7] text-center  ">Sign Up</Link>
             </>
           )}
         </div>

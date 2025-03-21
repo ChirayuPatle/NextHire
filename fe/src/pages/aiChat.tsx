@@ -61,11 +61,11 @@ const AiChat: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex flex-col items-center p-6">
+    <div className="min-h-screen bg-neutral-950 text-white flex flex-col items-center p-6">
       <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
         AI Chat
       </h1>
-      <div className="w-full max-w-2xl bg-gray-800 rounded-xl shadow-2xl p-4 flex flex-col space-y-4 overflow-auto h-[500px]">
+      <div className="w-full max-w-2xl bg-neutral-800 rounded-xl shadow-2xl p-4 flex flex-col space-y-4 overflow-auto h-[500px]">
         {messages.map((msg, index) => (
           <div
             key={index}
@@ -82,7 +82,7 @@ const AiChat: React.FC = () => {
               className={`p-3 rounded-lg max-w-md ${
                 msg.sender === "user"
                   ? "bg-blue-500 text-white"
-                  : "bg-gray-700 text-white"
+                  : "bg-neutral-700 text-white"
               } ${
                 msg.sender === "user" ? "rounded-br-none" : "rounded-bl-none"
               } shadow-md`}
@@ -101,7 +101,7 @@ const AiChat: React.FC = () => {
             <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
               🤖
             </div>
-            <div className="p-3 rounded-lg bg-gray-700 text-white rounded-bl-none shadow-md">
+            <div className="p-3 rounded-lg bg-neutral-700 text-white rounded-bl-none shadow-md">
               Typing...
             </div>
           </div>
@@ -114,7 +114,7 @@ const AiChat: React.FC = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setInput(e.target.value)
           }
-          className="w-full bg-gray-700 text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full bg-neutral-700 text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Type a message..."
           disabled={isLoading}
           onKeyPress={(e) => e.key === "Enter" && handleSend()}

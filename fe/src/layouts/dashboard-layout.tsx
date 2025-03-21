@@ -1,23 +1,20 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Outlet } from "react-router-dom"; 
+import Menubar from "@/menubar";
+import { Outlet } from "react-router-dom";
 
-
-const Layout = ({ children }: { children?: React.ReactNode }) => {
+const AppLayout = () => {
   return (
-     <SidebarProvider>
-      <div className="flex">
-        <AppSidebar />
-        <main className="flex-1 p-4">
-          <SidebarTrigger className="mb-4" />
-            <div className="px-2 md:px-10">
-          <Outlet /> 
-            </div>
-          {children}
-        </main>
-      </div>
-    </SidebarProvider>
-  )
-}
+    <div className="flex h-screen w-full">
+      {/* Sidebar with a fixed width */}
+      <Menubar  />
 
-export default Layout
+      {/* Main Content Area */}
+      <main className="flex-1 flex justify-center items-center h-full w-full bg-neutral-950 ml-[14rem] ">
+        <div className="w-full"> 
+          <Outlet />
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default AppLayout;

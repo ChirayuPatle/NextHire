@@ -15,14 +15,11 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="bg-gray-900 text-white p-4 flex items-center justify-between">
-      {/* Left: Brand Title */}
       <Link to={'/dashboard'}>
       <h1 className="text-2xl font-bold">NEXTHIRE</h1>
       </Link>
 
-      {/* Right: Search Bar, Icons (Hidden on Mobile) */}
       <div className="hidden md:flex items-center space-x-4">
-        {/* Search Bar */}
         <div className="relative">
           <input
             type="text"
@@ -32,7 +29,6 @@ const Navbar: React.FC = () => {
           <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
         </div>
 
-        {/* Notification & Profile Icons */}
         <Link to={'/notification'}>
         <Bell className="cursor-pointer hover:text-gray-400" size={24} />
         </Link>
@@ -41,12 +37,10 @@ const Navbar: React.FC = () => {
         </Link>
       </div>
 
-      {/* Mobile Menu Button */}
       <button className="md:hidden" onClick={() => setMenuOpen((prev) => !prev)}>
         {menuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
-      {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <div className="absolute top-16 left-0 w-full bg-gray-900 text-white p-4 flex flex-col items-center space-y-4 md:hidden">
           <div className="relative w-full px-4">

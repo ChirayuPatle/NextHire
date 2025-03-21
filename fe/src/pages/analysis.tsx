@@ -18,6 +18,7 @@ import {
   MenuIcon,
   ChevronRightIcon,
 } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 const NextHireDashboard = () => {
   // Sample data for applicants chart
@@ -66,83 +67,17 @@ const NextHireDashboard = () => {
     },
   ];
 
-  // State for active round selection
   const [activeRound, setActiveRound] = useState(1);
 
-  // State for sidebar expansion
-  const [sidebarExpanded, setSidebarExpanded] = useState(false);
-
-  // Menu items for sidebar
-  const menuItems = [
-    { icon: <HomeIcon size={20} />, label: "Dashboard", active: true },
-    { icon: <UserIcon size={20} />, label: "Candidates", active: false },
-    { icon: <ImageIcon size={20} />, label: "Messages", active: false },
-    { icon: <BarChartIcon size={20} />, label: "Analytics", active: false },
-    { icon: <SettingsIcon size={20} />, label: "Settings", active: false },
-  ];
-
   return (
-    <div className="flex flex-col min-h-screen h-full bg-black text-white">
-      {/* Header */}
-      <header className="flex items-center justify-between p-4 border-b border-gray-800">
-        <div className="flex items-center space-x-2">
-          <div className="text-white font-bold text-2xl">N</div>
-          <h1 className="font-bold text-xl">NextHire</h1>
-        </div>
+    <div className="flex flex-col min-h-screen h-full bg-neutral-950 text-white">
 
-        <div className="relative w-1/3">
-          <input
-            type="text"
-            placeholder="Search"
-            className="w-full bg-gray-800 rounded-md py-2 px-10 text-white"
-          />
-          <SearchIcon
-            className="absolute left-3 top-2.5 text-gray-400"
-            size={16}
-          />
-        </div>
-
-        <div className="flex items-center space-x-4">
-          <BellIcon size={20} />
-          <span className="font-medium">Admin</span>
-        </div>
-      </header>
-
-      {/* Main content */}
       <div className="flex flex-1 flex-grow">
-        {/* Expandable Sidebar */}
-        <aside
-          className={`bg-black border-r border-gray-800 transition-all duration-300 ${sidebarExpanded ? "w-48" : "w-16"}`}
-        >
-          <button
-            onClick={() => setSidebarExpanded(!sidebarExpanded)}
-            className="flex justify-center items-center p-2 mt-4 mx-auto text-gray-400 hover:text-white"
-          >
-            <MenuIcon size={20} />
-          </button>
 
-          <nav className="flex flex-col items-center space-y-6 mt-6">
-            {menuItems.map((item, index) => (
-              <button
-                key={index}
-                className={`flex items-center ${sidebarExpanded ? "w-4/5 px-3 justify-start" : "w-10 h-10 justify-center"} rounded-md ${item.active ? "bg-purple-900/30 text-purple-500" : "text-gray-400 hover:text-white"}`}
-              >
-                <span className="flex items-center justify-center">
-                  {item.icon}
-                </span>
-                {sidebarExpanded && (
-                  <span className="ml-3 whitespace-nowrap">{item.label}</span>
-                )}
-              </button>
-            ))}
-          </nav>
-        </aside>
-
-        {/* Dashboard content */}
-        <main className="flex-1 p-4 overflow-auto bg-black">
+        <main className="flex-1 p-4 overflow-auto bg-neutral-950">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
             {/* Applicants Chart */}
-            <div className="bg-gray-900 rounded-lg p-4">
+            <div className="bg-neutral-900/80 rounded-lg p-4">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-sm font-medium">Applicants</h2>
                 <span className="text-sm font-medium">200</span>
@@ -164,13 +99,14 @@ const NextHireDashboard = () => {
             </div>
 
             {/* Restructured Round Selection */}
-            <div className="bg-gray-900 rounded-lg p-6">
+            <div className="bg-neutral-900/80 rounded-lg p-6">
               <h2 className="text-sm font-medium mb-6 text-center">
                 Interview Rounds
               </h2>
               <div className="flex flex-col space-y-4">
                 {[1, 2, 3].map((round) => (
-                  <button
+                  <NavLink
+                  to={`/round/${round}`}
                     key={round}
                     onClick={() => setActiveRound(round)}
                     className={`flex items-center p-3 rounded-lg transition-all ${
@@ -188,27 +124,27 @@ const NextHireDashboard = () => {
                         {round === 1
                           ? "Technical Assessment"
                           : round === 2
-                            ? "Technical Interview"
-                            : "HR Discussion"}
+                            ? "Coding Round"
+                            : "HR Interview"}
                       </p>
                     </div>
                     {activeRound === round && (
                       <ChevronRightIcon size={20} className="text-purple-500" />
                     )}
-                  </button>
+                  </NavLink>
                 ))}
               </div>
             </div>
           </div>
 
           {/* Candidates Table */}
-          <div className="bg-gray-900 rounded-lg overflow-hidden">
+          <div className="bg-neutral-900/80 rounded-lg overflow-hidden">
             <div className="p-4">
               <div className="relative w-64 mb-4">
                 <input
                   type="text"
                   placeholder="Search Candidate"
-                  className="w-full bg-gray-800 rounded-md py-2 px-10 text-white text-sm"
+                  className="w-full bg-neutral-700/40 rounded-md py-2 px-10 text-white text-sm"
                 />
                 <SearchIcon
                   className="absolute left-3 top-2.5 text-gray-400"

@@ -79,8 +79,7 @@ export const TeamDetails: React.FC = () => {
   const domains = Array.from(new Set(teamMembersData.map((member) => member.domain)));
 
   return (
-    <div className="p-6 bg-gray-900 min-h-screen text-gray-100">
-      <div className="max-w-7xl mx-auto bg-gray-800 shadow rounded-lg p-6">
+      <div className="w-full h-full mx-auto bg-neutral-950 text-neutral-100 rounded-lg p-6">
         <h1 className="text-3xl font-bold mb-4 text-white">Team</h1>
 
         {/* Search and Filter */}
@@ -90,12 +89,12 @@ export const TeamDetails: React.FC = () => {
             placeholder="Search team members..."
             value={searchTerm}
             onChange={handleSearchChange}
-            className="px-4 py-2 border border-gray-700 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 border border-neutral-700 rounded-md bg-neutral-700 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <select
             value={filterDomain}
             onChange={handleFilterChange}
-            className="px-4 py-2 border border-gray-700 rounded-md bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 border border-neutral-700 rounded-md bg-neutral-700 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="All">All Domains</option>
             {domains.map((domain) => (
@@ -109,38 +108,38 @@ export const TeamDetails: React.FC = () => {
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full table-auto border-collapse">
-            <thead className="bg-gray-700">
+            <thead className="bg-neutral-700">
               <tr>
-                <th className="px-4 py-2 border border-gray-600">S.No</th>
-                <th className="px-4 py-2 border border-gray-600">Candidate Name</th>
-                <th className="px-4 py-2 border border-gray-600">Contact</th>
-                <th className="px-4 py-2 border border-gray-600">Email</th>
-                <th className="px-4 py-2 border border-gray-600 text-center">Domain</th>
-                <th className="px-4 py-2 border border-gray-600 text-center">Current Status</th>
+                <th className="px-4 py-2 border border-neutral-600">S.No</th>
+                <th className="px-4 py-2 border border-neutral-600">Candidate Name</th>
+                <th className="px-4 py-2 border border-neutral-600">Contact</th>
+                <th className="px-4 py-2 border border-neutral-600">Email</th>
+                <th className="px-4 py-2 border border-neutral-600 text-center">Domain</th>
+                <th className="px-4 py-2 border border-neutral-600 text-center">Current Status</th>
               </tr>
             </thead>
             <tbody>
               {membersToDisplay.map((member, index) => {
                 const statusKey = member.currentStatus.toLowerCase();
                 return (
-                  <tr key={member.id} className="hover:bg-gray-600">
-                    <td className="px-4 py-2 border border-gray-600 text-center">{index + 1}</td>
-                    <td className="px-4 py-2 border border-gray-600">{member.name}</td>
-                    <td className="px-4 py-2 border border-gray-600">{member.contact}</td>
-                    <td className="px-4 py-2 border border-gray-600">{member.email}</td>
-                    <td className="px-4 py-2 border border-gray-600 text-center">
+                  <tr key={member.id} className="hover:bg-neutral-600">
+                    <td className="px-4 py-2 border border-neutral-600 text-center">{index + 1}</td>
+                    <td className="px-4 py-2 border border-neutral-600">{member.name}</td>
+                    <td className="px-4 py-2 border border-neutral-600">{member.contact}</td>
+                    <td className="px-4 py-2 border border-neutral-600">{member.email}</td>
+                    <td className="px-4 py-2 border border-neutral-600 text-center">
                       <span
                         className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          domainColors[member.domain] || "bg-gray-500"
+                          domainColors[member.domain] || "bg-neutral-500"
                         }`}
                       >
                         {member.domain}
                       </span>
                     </td>
-                    <td className="px-4 py-2 border border-gray-600 text-center">
+                    <td className="px-4 py-2 border border-neutral-600 text-center">
                       <span
                         className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          statusColors[statusKey] || "bg-gray-500"
+                          statusColors[statusKey] || "bg-neutral-500"
                         }`}
                       >
                         {member.currentStatus}
@@ -165,7 +164,6 @@ export const TeamDetails: React.FC = () => {
           </div>
         )}
       </div>
-    </div>
   );
 };
 

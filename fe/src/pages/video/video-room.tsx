@@ -29,7 +29,7 @@ const VideoRoom = ({ roomId = "230472155" }: VideoRoomProps) => {
         serverSecret,
         roomId,
         Date.now().toString(),
-        ""
+        "Candidate"
       );
 
       const zp = ZegoUIKitPrebuilt.create(kitToken);
