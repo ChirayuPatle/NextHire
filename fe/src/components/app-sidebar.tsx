@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useState } from "react"; 
+
 import {
   Sidebar,
   SidebarContent,
@@ -17,6 +18,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
 import { NavLink } from "react-router-dom";
 
 const menuItems = [
@@ -39,6 +41,9 @@ export function AppSidebar() {
 
   return (
     <Sidebar className={`h-screen w-64 text-white ${isOpen ? "block" : "hidden"} md:block`}>
+
+  return (
+    <Sidebar className="h-screen w-64 text-white">
       <SidebarContent className="p-4 bg-neutral-950">
         <SidebarGroup>
           <SidebarGroupLabel className="text-lg text-white font-semibold tracking-wide">

@@ -14,6 +14,7 @@ import CodeEditor from "./pages/code/code-editor";
 import VideoRoom from "./pages/video/video-room";
 import Quiz from "./pages/interRound1";
 import About from "./pages/about";
+import FeedbackPage from "./pages/feedback";
 import Dashboard from "./pages/dashboard/dashboard";
 import TeamDetails from "./pages/teamDetails";
 import Analysis from "./pages/analysis";
@@ -72,6 +73,35 @@ function App() {
             <Route path="analysis" element={<Analysis />} />
             <Route path="profile" element={<UserProfile />} />
           </Route>
+            } />
+            <Route path="/header" element={<Header/>}></Route>
+            <Route path="/notification" element={<Notifications/>}></Route>
+            <Route path="/navbar" element={<Navbar/>}></Route>
+            <Route path="/login" element={<Login/>}></Route>
+            <Route path="/setting" element={<Settings/>}></Route>
+            <Route path="/aichat" element={<AiChat/>}></Route>
+            <Route path="/teamchat" element={<TeamChat/>}></Route>
+            <Route path="/feedback" element={<FeedbackPage />}></Route>
+            <Route path="/code" element={<CodeEditor />} ></Route>
+            <Route path="/room/:roomId" element={<VideoRoom />} ></Route>
+            <Route path="/roundone" element={<Quiz />}></Route>
+            <Route path="/home" element={<NextHire />}></Route>
+            <Route path="/about" element={<About />}></Route>
+            <Route path="/teamdetail" element={<TeamDetails />}></Route>
+            <Route path="/analysis" element={<Analysis />}></Route>
+            <Route path="/create-profile" element={<UserProfile />}></Route>
+
+            {/* Dashboard Routes */}
+             <Route path="/dashboard/*" element={<Layout />}>
+                <Route index element={<Dashboard />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="team" element={<TeamDetails />} />
+                <Route path="analysis" element={<Analysis />} />
+                <Route path="profile" element={<UserProfile />} />
+            </Route>
+            
+              
+
         </Routes>
       </main>
     </>
