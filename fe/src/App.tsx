@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import Loader from "./components/ui/loader";
+// import Loader from "./components/ui/loader";
 import AiChat from "./pages/aiChat";
 import Home from "./pages/home";
 import Header from "./menubar";
@@ -23,6 +23,7 @@ import UserProfile from "./pages/userProfile";
 const Feedback = lazy(() => import("./pages/feedback"));
 const FeedbackPage = lazy(() => import("./pages/feedback"));
 
+
 function App() {
   return (
     <>
@@ -36,7 +37,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           
           {/* Video Room Route with roomId parameter */}
-          <Route path="/room/:roomId?" element={<VideoRoom />} />
+          <Route path="/room/:roomId" element={<VideoRoom />} />
           
           {/* Coding and Assessment Routes */}
           <Route path="/code" element={<CodeEditor />} />
@@ -55,7 +56,10 @@ function App() {
           
           {/* Lazy-loaded Routes */}
           <Route path="/feedback" element={
-            <Suspense fallback={<Loader />}>
+            <Suspense fallback={
+            // <Loader />
+            <h1>Loading...</h1>
+            }>
               <Feedback />
             </Suspense>
           } />
