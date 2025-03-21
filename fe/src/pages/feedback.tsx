@@ -18,6 +18,7 @@ interface RadioQuestionProps {
   options: string[];
   value: string;
   onChange: (value: string) => void;
+  required?: boolean;
 }
 
 const RadioQuestion: React.FC<RadioQuestionProps> = ({
@@ -25,10 +26,14 @@ const RadioQuestion: React.FC<RadioQuestionProps> = ({
   options,
   value,
   onChange,
+  required = true,
 }) => {
   return (
     <div className="mb-8">
-      <div className="text-lg font-medium text-gray-300 mb-3">{question}</div>
+      <div className="text-lg font-medium text-gray-300 mb-3">
+        {question}
+        {required && <span className="text-red-500 ml-1">*</span>}
+      </div>
       <div className="space-y-3">
         {options.map((option) => (
           <div
@@ -62,6 +67,7 @@ interface TextFeedbackProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  required?: boolean;
 }
 
 const TextFeedback: React.FC<TextFeedbackProps> = ({
@@ -69,10 +75,14 @@ const TextFeedback: React.FC<TextFeedbackProps> = ({
   value,
   onChange,
   placeholder = "Share your thoughts...",
+  required = true,
 }) => {
   return (
     <div className="mb-8">
-      <div className="text-lg font-medium text-gray-300 mb-3">{label}</div>
+      <div className="text-lg font-medium text-gray-300 mb-3">
+        {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
+      </div>
       <textarea
         className="w-full p-3 rounded-lg border border-gray-700 bg-gray-900 text-white min-h-32 focus:outline-none focus:border-purple-600 focus:ring-1 focus:ring-purple-600"
         value={value}
@@ -101,6 +111,7 @@ const FeedbackPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
+  const [formErrors, setFormErrors] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const fetchFeedback = async () => {
@@ -142,12 +153,31 @@ const FeedbackPage: React.FC = () => {
     }
   }, [feedbackData]);
 
+  // Handle redirect after submission
+  useEffect(() => {
+    if (feedbackData?.submitted) {
+      const timer = setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [feedbackData?.submitted, navigate]);
+
   const updateRating = (field: keyof FeedbackData, value: string) => {
     if (feedbackData) {
       setFeedbackData({
         ...feedbackData,
         [field]: value,
       });
+      
+      // Clear error for this field
+      if (formErrors[field]) {
+        setFormErrors({
+          ...formErrors,
+          [field]: false,
+        });
+      }
     }
   };
 
@@ -157,11 +187,48 @@ const FeedbackPage: React.FC = () => {
         ...feedbackData,
         [field]: value,
       });
+      
+      // Clear error for this field
+      if (formErrors[field]) {
+        setFormErrors({
+          ...formErrors,
+          [field]: false,
+        });
+      }
     }
+  };
+
+  const validateForm = (): boolean => {
+    if (!feedbackData) return false;
+    
+    const requiredFields: (keyof FeedbackData)[] = [
+      "overallExperience",
+      "platformUsability",
+      "assessmentFairness",
+      "improvementSuggestions",
+    ];
+    
+    const errors: Record<string, boolean> = {};
+    let isValid = true;
+    
+    requiredFields.forEach(field => {
+      if (!feedbackData[field]) {
+        errors[field] = true;
+        isValid = false;
+      }
+    });
+    
+    setFormErrors(errors);
+    return isValid;
   };
 
   const handleSubmit = async () => {
     if (!feedbackData) return;
+
+    if (!validateForm()) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
 
     setSubmitting(true);
 
@@ -230,17 +297,6 @@ const FeedbackPage: React.FC = () => {
   if (feedbackData.submitted) {
     return (
       <div className="min-h-screen bg-black py-12 px-4">
-        {/* Logo in top left corner */}
-        <div
-          className="absolute top-4 left-4 flex items-center cursor-pointer"
-          onClick={() => navigate("/")}
-        >
-          <div className="w-12 h-12 border border-white rounded flex items-center justify-center">
-            {/* Empty box for logo as requested */}
-          </div>
-          <h1 className="text-2xl font-bold text-white ml-2">NextHire</h1>
-        </div>
-
         <div className="max-w-xl mx-auto bg-gray-950 rounded-xl shadow-sm p-8 mt-16">
           <div className="text-center mb-8">
             <div className="w-16 h-16 mx-auto bg-purple-900 rounded-full flex items-center justify-center">
@@ -262,13 +318,6 @@ const FeedbackPage: React.FC = () => {
               We appreciate your feedback, {feedbackData.name}.
             </p>
           </div>
-
-          <Button
-            onClick={() => navigate("/")}
-            className="w-full bg-purple-600 hover:bg-purple-700 text-white"
-          >
-            Return Home
-          </Button>
         </div>
       </div>
     );
@@ -276,17 +325,6 @@ const FeedbackPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black py-6 px-4">
-      {/* Logo in top left corner */}
-      <div
-        className="absolute top-4 left-4 flex items-center cursor-pointer"
-        onClick={() => navigate("/")}
-      >
-        <div className="w-12 h-12 border border-white rounded flex items-center justify-center">
-          {/* Empty box for logo as requested */}
-        </div>
-        <h1 className="text-2xl font-bold text-white ml-2">NextHire</h1>
-      </div>
-
       <div className="max-w-xl mx-auto mt-16">
         {/* Header with Back Button */}
         <div className="flex items-center justify-end mb-6">
@@ -312,6 +350,14 @@ const FeedbackPage: React.FC = () => {
               We'd love to hear about your interview experience with NextHire.
               Your feedback helps us improve.
             </p>
+            
+            {Object.keys(formErrors).length > 0 && (
+              <div className="mt-4 p-3 bg-red-900 bg-opacity-40 rounded-lg border border-red-500">
+                <p className="text-red-400 text-sm">
+                  Please fill in all required fields marked with <span className="text-red-500">*</span>
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Form Questions */}
@@ -320,6 +366,7 @@ const FeedbackPage: React.FC = () => {
             options={overallOptions}
             value={feedbackData.overallExperience}
             onChange={(value) => updateRating("overallExperience", value)}
+            required={true}
           />
 
           <RadioQuestion
@@ -327,6 +374,7 @@ const FeedbackPage: React.FC = () => {
             options={usabilityOptions}
             value={feedbackData.platformUsability}
             onChange={(value) => updateRating("platformUsability", value)}
+            required={true}
           />
 
           <RadioQuestion
@@ -334,6 +382,7 @@ const FeedbackPage: React.FC = () => {
             options={assessmentOptions}
             value={feedbackData.assessmentFairness}
             onChange={(value) => updateRating("assessmentFairness", value)}
+            required={true}
           />
 
           <TextFeedback
@@ -341,6 +390,7 @@ const FeedbackPage: React.FC = () => {
             value={feedbackData.improvementSuggestions}
             onChange={(value) => updateText("improvementSuggestions", value)}
             placeholder="Your suggestions help us make NextHire better for everyone..."
+            required={true}
           />
 
           <div className="mt-8">
@@ -351,9 +401,6 @@ const FeedbackPage: React.FC = () => {
             >
               {submitting ? "Submitting..." : "Submit Feedback"}
             </Button>
-            <p className="text-center text-gray-500 text-sm mt-3">
-              Powered by NextHire
-            </p>
           </div>
         </div>
       </div>
