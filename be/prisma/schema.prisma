@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  verified  Boolean  @default(false)
+  role      UserRole @default(CANDIDATE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  candidate      Candidate?
+  candidateId    Int?
+  organization   Organization?
+  organizationId Int?
+
+  sessions          Session[]
+  verificationCodes VerificationCode[]
+}
+
+model Candidate {
+  id         Int      @id @default(autoincrement())
+  userId     Int      @unique
+  user       User     @relation(fields: [userId], references: [id])
+  firstName  String
+  lastName   String
+  resume     String?
+  skills     String[]
+  education  Json?
+  experience Json?
+}
+
+model Organization {
+  id          Int     @id @default(autoincrement())
+  userId      Int     @unique
+  user        User    @relation(references: [id], fields: [userId])
+  name        String
+  industry    String
+  website     String?
+  address     String?
+  description String?
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  userAgent String?
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model VerificationCode {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+// Enums
+enum UserRole {
+  CANDIDATE
+  ORGANIZATION
+}
