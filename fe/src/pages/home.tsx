@@ -246,15 +246,12 @@ const Index = () => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
               <Link to="/auth?type=register&role=organization">
+              <Link to={'/login'}>
                 <Button variant="primary" size="lg" className="w-full sm:w-auto">
                   Get Started Free
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Link to="/contact">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                  Request Demo
-                </Button>
               </Link>
             </div>
           </div>

@@ -25,7 +25,7 @@ const TeamChat: React.FC = () => {
 
   return (
     <div className="flex flex-col h-screen text-white font-sans">
-
+      <h1 id='one' className="text-3xl font-bold text-white-50 tracking-wide shadow-lg p-10">NEXTHIRE</h1>
       <div className="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-neutral-700">
         {messages.map((message) => (
           <div
