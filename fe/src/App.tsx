@@ -11,7 +11,7 @@ import Quiz from "./pages/interRound1";
 import Login from "./pages/auth/page";
 import Navbar from "./pages/navbar";
 import Notifications from "./pages/notification";
-import Settings from "./pages/setting";
+import Settings from "./pages/setting/setting";
 import TeamChat from "./pages/teamChat";
 import VideoRoom from "./pages/video/video-room";
 import TeamDetails from "./pages/teamDetails";
@@ -53,12 +53,12 @@ function App() {
       <Route path="/dashboard" element={<AppLayout />} >
       <Route index  element={<Dashboard />} />
       <Route path="team" element={<TeamDetails />} />
-        <Route path="settings" element={<Settings />} />
         <Route path="aichat" element={<AiChat />} />
         <Route path="analysis" element={<NextHireDashboard />} />
         <Route path="notification" element={<Notifications />} />
         <Route path="teamchat" element={<TeamChat />} />
       </Route>  
+        <Route path="/settings" element={<Settings />} />
 
       <Route path="/user-dashboard" element={<CandidateDashboard />} ></Route>
 

@@ -1,6 +1,7 @@
 import { BarChart, LayoutDashboard, Menu, MessageCircleCode, MessageSquare, Settings, Users, X, ChartBar } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logo from '../public/logo.png'
 
 const Menubar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,7 @@ const Menubar: React.FC = () => {
       >
         {/* Sidebar Header */}
         <div className="flex flex-row items-center">
-          <img src="./logo.png" alt="" className="size-14 w-16" />
+          <img src={logo} alt="" className="size-14 w-16" />
           <h2 className="text-xl font-semibold">NEXTHIRE</h2>
         </div>
 
@@ -41,7 +42,7 @@ const Menubar: React.FC = () => {
             <SidebarItem to="/dashboard/analysis" icon={<BarChart size={20} />} label="Analysis" isActive={location.pathname === "/dashboard/analysis"} />
             <SidebarItem to="/dashboard/notification" icon={<MessageCircleCode size={20} />} label="Notifications" isActive={location.pathname === "/dashboard/notification"} />
             <SidebarItem to="/dashboard/aichat" icon={<ChartBar size={20} />} label="Aichat" isActive={location.pathname === "/dashboard/aichat"} />
-            <SidebarItem to="/dashboard/settings" icon={<Settings size={20} />} label="Settings" isActive={location.pathname === "/dashboard/settings"} />
+            <SidebarItem to="/settings" icon={<Settings size={20} />} label="Settings" isActive={location.pathname === "/dashboard/settings"} />
           </ul>
         </nav>
       </aside>

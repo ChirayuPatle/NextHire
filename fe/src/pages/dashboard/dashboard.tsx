@@ -42,7 +42,7 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   
   return (
-    <div className="animate-fade-in text-white mt-[20rem] ">
+    <div className="animate-fade-in  text-white mt-[27rem]">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white">Dashboard</h1>
         <p className="text-[#ABABAB]">Manage your recruitment process and track candidates.</p>
@@ -237,9 +237,11 @@ const AdminDashboard = () => {
             <BarChart2 className="h-10 w-10 text-[#B967FF] mx-auto mb-4" />
             <p className="text-[#ABABAB] mb-3">Analytics dashboard will be displayed here</p>
             <Link to="/analytics">
+            <Link to={'/dashboard/analysis'}>
               <Button variant="outline" size="sm">
                 View Detailed Analytics
               </Button>
+             </Link>
             </Link>
           </div>
         </Card>

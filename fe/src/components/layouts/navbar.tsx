@@ -56,10 +56,7 @@ const Navbar = ({
           to="/" 
           className="flex items-center space-x-2"
         >
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 7L16 20.5L7 34H14L23 20.5L14 7H7Z" fill="#B967FF"/>
-            <path d="M26 7L35 20.5L26 34H33L42 20.5L33 7H26Z" fill="#B967FF"/>
-          </svg>
+          <img src="./logo.png" alt="" className="w-14 h-14"/>
           <span className="text-xl font-bold text-white">NextHire</span>
         </Link>
         

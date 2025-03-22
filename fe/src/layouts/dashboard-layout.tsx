@@ -8,7 +8,7 @@ const AppLayout = () => {
       <Menubar  />
 
       {/* Main Content Area */}
-      <main className="flex-1 flex justify-center items-center h-full w-full bg-neutral-950 ml-[14rem] ">
+      <main className="flex-1 flex justify-center items-center h-full w-full bg-neutral-950 md:ml-[14rem] ">
         <div className="w-full"> 
           <Outlet />
         </div>
