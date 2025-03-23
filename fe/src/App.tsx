@@ -19,6 +19,9 @@ import TeamDetails from "./pages/teamDetails";
 import PrivacySettings from "./pages/setting/privacy";
 import HelpPage from "./pages/setting/help";
 import LocationSettings from "./pages/setting/location";
+import UserDashboard from "./pages/user/userDashboard";
+import UserLayout from "./layouts/UserLayout";
+import UserSession from "./pages/user/userSession";
 
 const Feedback = lazy(() => import("./pages/feedback"));
 
@@ -35,6 +38,7 @@ function App() {
           </Suspense>
         } 
       />
+      {/* Default pages */}
       <Route path="/login" element={<Login />} />
       <Route path="/navbar" element={<Navbar />} />
       <Route path="/notification" element={<Notifications />} />
@@ -44,16 +48,7 @@ function App() {
       <Route path="/round/2" element={<CodeEditor />} />
       <Route path="/round/3" element={<VideoRoom />} />
 
-      {/* Dashboard Layout with Nested Routes */}
-      {/* <Route path="/dashboard" element={<AppLayout />}>
-        <Route index element={<TeamChat />} /> 
-        <Route path="team" element={<TeamDetails />} />
-        <Route path="settings" element={<Settings />} />
-        <Route path="aichat" element={<AiChat />} />
-        <Route path="analysis" element={<NextHireDashboard />} />
-      </Route> */}
-
-
+      {/* Admin pages */}
       <Route path="/dashboard" element={<AppLayout />} >
       <Route index  element={<Dashboard />} />
       <Route path="team" element={<TeamDetails />} />
@@ -62,11 +57,21 @@ function App() {
         <Route path="notification" element={<Notifications />} />
         <Route path="teamchat" element={<TeamChat />} />
       </Route>  
+
+      {/* Setting pages */}
         <Route path="/settings" element={<Settings />} />
         <Route path="/manage-settings" element={<ManageAccount />} />
         <Route path="/help" element={<HelpPage />} />
         <Route path="/privacy-settings" element={<PrivacySettings />} />
         <Route path="/location" element={<LocationSettings />} />
+
+        {/* User pages */}
+        <Route path="/user" element={<UserLayout />} >
+          <Route index  element={<UserDashboard />} />
+          <Route path="aichat" element={<AiChat />} />
+          <Route path="user-session" element={<UserSession />} />
+          {/* <Route path="/settings" element={<Settings />} /> */}
+        </Route> 
 
       <Route path="/user-dashboard" element={<CandidateDashboard />} ></Route>
 

@@ -267,7 +267,7 @@ const Index = () => {
             </div>
             <div>
               <p className="text-2xl font-bold text-[#B967FF]">98%</p>
-              <p className="text-sm text-[#ABABAB]">Satisfaction</p>
+              <p className="text-sm text-[#ABABAB]">Satisfaction</p>s
             </div>
             <div>
               <p className="text-2xl font-bold text-[#B967FF]">10,000+</p>
