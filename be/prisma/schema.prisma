@@ -8,49 +8,77 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  verified  Boolean  @default(false)
-  role      UserRole @default(CANDIDATE)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id             String        @id @default(cuid())
+  email          String        @unique
+  password       String
+  verified       Boolean       @default(false)
+  role           UserRole      @default(CANDIDATE)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  details        Json?
   candidate      Candidate?
-  candidateId    Int?
+  candidateId    String?
   organization   Organization?
-  organizationId Int?
+  organizationId String?
 
   sessions          Session[]
   verificationCodes VerificationCode[]
 }
 
 model Candidate {
-  id         Int      @id @default(autoincrement())
-  userId     Int      @unique
-  user       User     @relation(fields: [userId], references: [id])
-  firstName  String
-  lastName   String
-  resume     String?
-  skills     String[]
-  education  Json?
-  experience Json?
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  firstName String
+  lastName  String
+  resume    String?
+  skills    String[]
+  details   Json?
 }
 
 model Organization {
-  id          Int     @id @default(autoincrement())
-  userId      Int     @unique
-  user        User    @relation(references: [id], fields: [userId])
+  id          String               @id @default(cuid())
+  userId      String               @unique
+  user        User                 @relation(fields: [userId], references: [id])
   name        String
   industry    String
   website     String?
   address     String?
   description String?
+  details     Json?
+  sessions    RecruitmentSession[]
+}
+
+model RecruitmentSession {
+  id             String       @id @default(cuid())
+  title          String
+  description    String?
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  details        Json?
+  rounds         Round[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model Round {
+  id          String             @id @default(cuid())
+  sessionId   String
+  session     RecruitmentSession @relation(fields: [sessionId], references: [id])
+  type        RoundType
+  title       String
+  description String?
+  details     Json?
+  startDate   DateTime
+  endDate     DateTime
+  status      RoundStatus        @default(SCHEDULED)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
 }
 
 model Session {
-  id        Int      @id @default(autoincrement())
-  userId    Int
+  id        String   @id @default(cuid())
+  userId    String
   userAgent String?
   createdAt DateTime @default(now())
   expiresAt DateTime
@@ -58,15 +86,31 @@ model Session {
 }
 
 model VerificationCode {
-  id        Int      @id @default(autoincrement())
-  userId    Int
+  id        String   @id @default(cuid())
+  userId    String
   createdAt DateTime @default(now())
   expiresAt DateTime
   user      User     @relation(fields: [userId], references: [id])
 }
 
-// Enums
 enum UserRole {
   CANDIDATE
   ORGANIZATION
+}
+
+enum RoundType {
+  RESUME_SCREENING
+  APTITUDE_TEST
+  TECHNICAL_INTERVIEW
+  CODING_CHALLENGE
+  GROUP_DISCUSSION
+  HR_INTERVIEW
+  FINAL_INTERVIEW
+}
+
+enum RoundStatus {
+  SCHEDULED
+  ONGOING
+  COMPLETED
+  CANCELLED
 }

@@ -37,3 +37,9 @@ export const LoginOrgSchema = AuthBaseSchema.extend({
   email: emailSchema,
   password: passwordSchema,
 });
+
+export const UserSchema = z.object({
+  email: z.string().email(),
+  organizationId: z.string().optional(),
+  candidateId: z.string().optional(),
+});

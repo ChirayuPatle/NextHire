@@ -1,15 +1,10 @@
-# be
+# Next Hire Server
 
-To install dependencies:
+### Todos
 
-```bash
-bun install
-```
+BE :
+1. Test auth
+2. Add Session Creation and Round Creation Logic
 
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.2.5. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+FE :
+1. Create Loader
