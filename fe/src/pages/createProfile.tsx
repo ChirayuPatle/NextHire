@@ -174,7 +174,8 @@ const CreateProfile: FC = () => {
             icon={<User size={20} />}
             type="text"
             name="fullName"
-            placeholder="Full Name"
+            label="Full Name"
+            placeholder="Enter your full name"
             value={formData.fullName}
             onChange={handleInputChange}
             error={errors.fullName}
@@ -185,7 +186,8 @@ const CreateProfile: FC = () => {
             icon={<User size={20} />}
             type="text"
             name="username"
-            placeholder="Username"
+            label="Username"
+            placeholder="Enter your username"
             value={formData.username}
             onChange={handleInputChange}
             error={errors.username}
@@ -196,7 +198,8 @@ const CreateProfile: FC = () => {
             icon={<Mail size={20} />}
             type="email"
             name="email"
-            placeholder="Email"
+            label="Email"
+            placeholder="Enter your email"
             value={formData.email}
             onChange={handleInputChange}
             error={errors.email}
@@ -207,7 +210,8 @@ const CreateProfile: FC = () => {
             icon={<Lock size={20} />}
             type="password"
             name="password"
-            placeholder="Password"
+            label="Password"
+            placeholder="Enter your password"
             value={formData.password}
             onChange={handleInputChange}
             error={errors.password}
@@ -218,7 +222,8 @@ const CreateProfile: FC = () => {
             icon={<Lock size={20} />}
             type="password"
             name="confirmPassword"
-            placeholder="Confirm Password"
+            label="Confirm Password"
+            placeholder="Confirm your password"
             value={formData.confirmPassword}
             onChange={handleInputChange}
             error={errors.confirmPassword}
@@ -229,7 +234,8 @@ const CreateProfile: FC = () => {
             icon={<Info size={20} />}
             type="textarea"
             name="bio"
-            placeholder="Bio"
+            label="Bio"
+            placeholder="Tell us about yourself"
             value={formData.bio}
             onChange={handleInputChange}
           />
@@ -239,7 +245,8 @@ const CreateProfile: FC = () => {
             icon={<Phone size={20} />}
             type="tel"
             name="phone"
-            placeholder="Phone Number"
+            label="Phone Number"
+            placeholder="Enter your phone number"
             value={formData.phone}
             onChange={handleInputChange}
           />
@@ -249,7 +256,8 @@ const CreateProfile: FC = () => {
             icon={<Calendar size={20} />}
             type="date"
             name="dateOfBirth"
-            placeholder="Date of Birth"
+            label="Date of Birth"
+            placeholder="Select your date of birth"
             value={formData.dateOfBirth}
             onChange={handleInputChange}
           />
@@ -259,7 +267,8 @@ const CreateProfile: FC = () => {
             icon={<User size={20} />}
             type="select"
             name="gender"
-            placeholder="Gender"
+            label="Gender"
+            placeholder="Select your gender"
             value={formData.gender}
             onChange={handleInputChange}
             options={[
@@ -275,7 +284,8 @@ const CreateProfile: FC = () => {
             icon={<MapPin size={20} />}
             type="text"
             name="address"
-            placeholder="Address"
+            label="Address"
+            placeholder="Enter your address"
             value={formData.address}
             onChange={handleInputChange}
           />
@@ -285,7 +295,8 @@ const CreateProfile: FC = () => {
             icon={<Briefcase size={20} />}
             type="text"
             name="jobTitle"
-            placeholder="Job Title"
+            label="Job Title"
+            placeholder="Enter your job title"
             value={formData.jobTitle}
             onChange={handleInputChange}
           />
@@ -295,7 +306,8 @@ const CreateProfile: FC = () => {
             icon={<Briefcase size={20} />}
             type="text"
             name="company"
-            placeholder="Company"
+            label="Company"
+            placeholder="Enter your company name"
             value={formData.company}
             onChange={handleInputChange}
           />
@@ -305,7 +317,8 @@ const CreateProfile: FC = () => {
             icon={<Briefcase size={20} />}
             type="text"
             name="industry"
-            placeholder="Industry"
+            label="Industry"
+            placeholder="Enter your industry"
             value={formData.industry}
             onChange={handleInputChange}
           />
@@ -315,7 +328,8 @@ const CreateProfile: FC = () => {
             icon={<Briefcase size={20} />}
             type="text"
             name="skills"
-            placeholder="Skills (comma separated)"
+            label="Skills"
+            placeholder="Enter your skills (comma separated)"
             value={formData.skills}
             onChange={handleInputChange}
           />
@@ -327,7 +341,8 @@ const CreateProfile: FC = () => {
               icon={<Linkedin size={20} />}
               type="text"
               name="linkedin"
-              placeholder="LinkedIn Profile"
+              label="LinkedIn Profile"
+              placeholder="Enter your LinkedIn profile URL"
               value={formData.linkedin}
               onChange={handleInputChange}
             />
@@ -335,7 +350,8 @@ const CreateProfile: FC = () => {
               icon={<Twitter size={20} />}
               type="text"
               name="twitter"
-              placeholder="Twitter Profile"
+              label="Twitter Profile"
+              placeholder="Enter your Twitter profile URL"
               value={formData.twitter}
               onChange={handleInputChange}
             />
@@ -343,7 +359,8 @@ const CreateProfile: FC = () => {
               icon={<Github size={20} />}
               type="text"
               name="github"
-              placeholder="GitHub Profile"
+              label="GitHub Profile"
+              placeholder="Enter your GitHub profile URL"
               value={formData.github}
               onChange={handleInputChange}
             />
@@ -364,7 +381,8 @@ const CreateProfile: FC = () => {
               icon={<Shield size={20} />}
               type="select"
               name="privacySettings"
-              placeholder="Privacy Settings"
+              label="Privacy Settings"
+              placeholder="Select privacy settings"
               value={formData.privacySettings}
               onChange={handleInputChange}
               options={[
@@ -401,14 +419,15 @@ const FormField: FC<{
   icon: JSX.Element;
   type: string;
   name: string;
+  label: string;
   placeholder: string;
   value: string | boolean;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   error?: string;
   options?: { value: string; label: string }[];
-  label?: string;
-}> = ({ icon, type, name, placeholder, value, onChange, error, options, label }) => (
+}> = ({ icon, type, name, label, placeholder, value, onChange, error, options }) => (
   <div className="relative">
+    <label className="block text-sm font-medium mb-2">{label}</label>
     <div className="flex items-center space-x-3">
       <div className="text-neutral-400">{icon}</div>
       {type === "textarea" ? (
