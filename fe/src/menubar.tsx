@@ -1,14 +1,12 @@
 
-import { BarChart, LayoutDashboard, Menu, MessageCircleCode, MessageSquare, Settings, Users, X, ChartBar, User } from "lucide-react";
 
+import { BarChart, LayoutDashboard, Menu, Settings, User, Users,X, ChartBar, } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from '../public/logo.png';
-import chat from '../public/chat.png';
 
 const Menubar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation(); // Get the current route location
+  const location = useLocation(); 
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -16,7 +14,6 @@ const Menubar: React.FC = () => {
 
   return (
     <>
-      {/* Hamburger Button (Mobile Only) */}
       <button
         className="md:hidden fixed top-4 left-4 z-50 bg-neutral-800 text-white p-2 rounded-md hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-500"
         onClick={toggleSidebar}
@@ -33,7 +30,7 @@ const Menubar: React.FC = () => {
         <div>
           {/* Sidebar Header */}
           <div className="flex flex-row items-center">
-            <img src={logo} alt="" className="size-14 w-16" />
+            <img src="./logo.png" alt="" className="size-14 w-16" />
             <h2 className="text-xl font-semibold">NEXTHIRE</h2>
           </div>
 
@@ -54,7 +51,7 @@ const Menubar: React.FC = () => {
           {/* Profile Image */}
           <Link to={'/aichat'}>
           <div className="flex flex-col items-center space-y-2">
-            <img src={chat} alt="Profile" className="w-16 h-16" />
+            <img src="./chat.png" alt="Profile" className="w-16 h-16" />
             <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition">Next AI</button>
           </div>
           </Link>

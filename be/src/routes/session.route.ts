@@ -3,6 +3,7 @@
 import { Router } from 'express';
 import {
   createSessionHandler,
+  deleteSessionHandler,
   getOrganizationSessionsHandler,
   getSessionByIdHandler,
 } from '../controllers/session.controller';
@@ -13,6 +14,8 @@ const sessionRouter = Router();
 sessionRouter.post('/', createSessionHandler);
 
 sessionRouter.get('/', getOrganizationSessionsHandler);
+
+sessionRouter.delete('/', deleteSessionHandler);
 
 sessionRouter.get('/:id', getSessionByIdHandler);
 

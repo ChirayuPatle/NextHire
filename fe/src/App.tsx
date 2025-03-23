@@ -19,6 +19,8 @@ import TeamDetails from "./pages/teamDetails";
 import PrivacySettings from "./pages/setting/privacy";
 import HelpPage from "./pages/setting/help";
 import LocationSettings from "./pages/setting/location";
+import Sessions from "./pages/admin/Sessions";
+import SessionDetail from "./pages/admin/SessionDetail";
 import UserLayout from "./layouts/UserLayout";
 import UserSession from "./pages/user/userSession";
 import CreateProfile from "./pages/createProfile";
@@ -59,6 +61,8 @@ function App() {
         <Route path="analysis" element={<NextHireDashboard />} />
         <Route path="notification" element={<Notifications />} />
         <Route path="teamchat" element={<TeamChat />} />
+        <Route path="sessions" element={<Sessions />} ></Route>
+        <Route path="sessions/:id" element={<SessionDetail />} ></Route>
       </Route>  
 
       {/* Setting pages */}
@@ -80,6 +84,10 @@ function App() {
         </Route> 
 
       <Route path="/user-dashboard" element={<UserDashboard />} ></Route>
+
+      {/* Recruitment Session Route */}
+
+      
 
     </Routes>
   );
