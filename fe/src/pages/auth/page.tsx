@@ -56,31 +56,38 @@ const Auth = () => {
     toast.success("OTP sent to your email. Please check your inbox.");
   };
 
-  // Handle registration form submission
-  const handleRegistration = (data: any) => {
+  const handleRegistration = async (data: any) => {
+    setIsLoading(true);
+
     if (step === 1) {
       // Validate registration form
-      if (data.password !== data.confirmPassword) {
-        toast.error("Passwords do not match");
+      if (!data.email || !data.password) {
+        toast.error("Please fill in all required fields");
+        setIsLoading(false);
         return;
       }
 
       if (data.password.length < 8) {
         toast.error("Password must be at least 8 characters long");
+        setIsLoading(false);
         return;
       }
 
-      // Send OTP to the user's email
-      sendOTP(data.email);
-      setStep(2); // Move to OTP verification step
+      // Simulate an API call to send OTP
+      setTimeout(() => {
+        sendOTP(data.email);
+        setStep(2); // Move to OTP verification step
+        setIsLoading(false);
+      }, 1000);
     } else if (step === 2) {
       // Verify OTP
       if (data.otp === otp) {
         toast.success("OTP verified successfully!");
-        navigate("/dashboard"); // Navigate to dashboard after successful verification
+        navigate(`/register?role=${role}`); // Navigate to registration page with role
       } else {
         toast.error("Invalid OTP. Please try again.");
       }
+      setIsLoading(false);
     }
   };
 
@@ -187,10 +194,14 @@ const Auth = () => {
                 <div className="mt-6">
                   <button
                     type="submit"
-                    className="w-full p-3 rounded-lg bg-[#B967FF] text-white font-semibold hover:bg-[#8344B8] transition-colors"
+                    className="w-full p-3 rounded-lg bg-[#B967FF] text-white font-semibold hover:bg-[#8344B8] transition-colors flex items-center justify-center"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Verifying..." : "Verify OTP"}
+                    {isLoading ? (
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    ) : (
+                      "Verify OTP"
+                    )}
                   </button>
                 </div>
               </>
@@ -224,30 +235,17 @@ const Auth = () => {
                   )}
                 </div>
 
-                {authType === "register" && (
-                  <div className="mb-4">
-                    <label htmlFor="confirmPassword" className="block text-[#ABABAB] mb-2">Confirm Password</label>
-                    <div className="relative">
-                      <input
-                        type="password"
-                        id="confirmPassword"
-                        className="w-full p-2 rounded-lg bg-[#2F2F2F] text-white border border-[#2F2F2F] focus:outline-none focus:border-[#B967FF] pr-10"
-                        {...register("confirmPassword", { required: "Confirm Password is required" })}
-                      />
-                    </div>
-                    {errors.confirmPassword && (
-                      <p className="text-red-500 text-sm mt-1">{errors.confirmPassword?.message as string}</p>
-                    )}
-                  </div>
-                )}
-
                 <div className="mt-6">
                   <button
                     type="submit"
-                    className="w-full p-3 rounded-lg bg-[#B967FF] text-white font-semibold hover:bg-[#8344B8] transition-colors"
+                    className="w-full p-3 rounded-lg bg-[#B967FF] text-white font-semibold hover:bg-[#8344B8] transition-colors flex items-center justify-center"
                     disabled={isLoading}
                   >
-                    {authType === "login" ? "Sign In" : "Continue"}
+                    {isLoading ? (
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    ) : (
+                      authType === "login" ? "Sign In" : "Continue"
+                    )}
                   </button>
                 </div>
               </>
@@ -262,7 +260,7 @@ const Auth = () => {
               type="button"
               className="text-[#B967FF] hover:text-[#D4A5FF]"
               onClick={toggleAuthType}
-            >
+            > 
               {authType === "login" ? "Sign up" : "Sign in"}
             </button>
           </p>

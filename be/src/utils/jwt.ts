@@ -1,63 +1,54 @@
-import jwt, { type SignOptions, type VerifyOptions } from 'jsonwebtoken';
-import env from '../configs/env-config';
+import jwt from 'jsonwebtoken';
+import type { SignOptions, Secret } from 'jsonwebtoken';
 
-export type RefreshTokenPayload = {
-  sessionId: number; // Changed from Mongoose's ObjectId to number (Prisma's default ID type)
-};
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const REFRESH_TOKEN_SECRET =
+  process.env.REFRESH_TOKEN_SECRET || 'refresh-secret-key';
 
-export type AccessTokenPayload = {
-  userId: number; // Changed from Mongoose's ObjectId to number (Prisma's default ID type)
-  sessionId: number; // Changed from Mongoose's ObjectId to number (Prisma's default ID type)
-};
+export interface TokenPayload {
+  userId?: string;
+  sessionId: string;
+  [key: string]: unknown;
+}
 
-type SignOptionsAndSecret = SignOptions & {
-  secret: string;
-};
+export interface RefreshTokenPayload {
+  sessionId: string;
+}
 
-const defaults: SignOptions = {
-  audience: ['user'],
-};
+export interface JWTOptions extends SignOptions {
+  secret?: Secret;
+}
 
-const accessTokenSignOptions: SignOptionsAndSecret = {
-  expiresIn: '15m',
-  secret: env.JWT_SECRET,
-};
-
-export const refreshTokenSignOptions: SignOptionsAndSecret = {
+export const refreshTokenSignOptions: JWTOptions = {
   expiresIn: '30d',
-  secret: env.JWT_REFRESH_SECRET,
+  secret: REFRESH_TOKEN_SECRET,
+};
+
+export const defaultSignOptions: JWTOptions = {
+  expiresIn: '15m',
+  secret: JWT_SECRET,
 };
 
 export const signToken = (
-  payload: AccessTokenPayload | RefreshTokenPayload,
-  options?: SignOptionsAndSecret,
+  payload: TokenPayload,
+  options: JWTOptions = defaultSignOptions,
 ) => {
-  const { secret, ...signOpts } = options || accessTokenSignOptions;
-  return jwt.sign(payload, secret, {
-    ...defaults,
-    ...signOpts,
-  });
+  const { secret, ...signOptions } = options;
+  return jwt.sign(payload, secret || JWT_SECRET, signOptions);
 };
 
-export const verifyToken = <TPayload extends Object = AccessTokenPayload>(
+export const verifyToken = <T extends TokenPayload>(
   token: string,
-  options?: VerifyOptions & {
-    secret: string;
-  },
+  options: JWTOptions = defaultSignOptions,
 ) => {
-  const { secret = env.JWT_SECRET, ...verifyOpts } = options || {};
-
   try {
-    const payload = jwt.verify(token, secret, {
-      ...defaults,
-      ...verifyOpts,
-    }) as TPayload;
+    const { secret, ...verifyOptions } = options;
+    const payload = jwt.verify(token, secret || JWT_SECRET, verifyOptions) as T;
+    return { payload, expired: false };
+  } catch (error) {
     return {
-      payload,
-    };
-  } catch (error: any) {
-    return {
-      error: error.message,
+      payload: null,
+      expired: (error as Error).message === 'jwt expired',
     };
   }
 };

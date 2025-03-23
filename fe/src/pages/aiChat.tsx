@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Send } from "lucide-react";
+import { Send, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios"; // Import axios
 
 interface Message {
@@ -14,6 +15,7 @@ const AiChat: React.FC = () => {
   const [streamedResponse, setStreamedResponse] = useState<string>("");
   const userId = useRef<string>(`user-${Date.now()}`);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedMessages = localStorage.getItem(`chatHistory-${userId.current}`);
@@ -85,9 +87,14 @@ const AiChat: React.FC = () => {
   return (
     <div className="min-h-screen bg-neutral-950 text-white flex flex-col">
       {/* Header */}
-      <h1 className="text-3xl font-bold p-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-        Interview Assistant
-      </h1>
+      <div className="flex items-center p-6">
+        <button onClick={() => navigate(-1)} className="text-white mr-4">
+          <ArrowLeft size={24} />
+        </button>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+        NEXT Assistant
+        </h1>
+      </div>
 
       {/* Chat Messages Container */}
       <div className="flex-1 overflow-y-auto p-4">

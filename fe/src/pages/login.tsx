@@ -80,11 +80,11 @@ const Login: React.FC = () => {
               </div>
 
               {/* Create Account Button */}
-              <Link to={'/dashboard'}>
+              <Link to={'/register'}>
               <button
                 className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg flex items-center justify-center transition shadow-md hover:shadow-lg"
               >
-                <LogIn size={20} className="mr-2" /> Create Account
+                <LogIn size={20} className="mr-2" /> Create Account 
               </button>
               </Link>
             </form>

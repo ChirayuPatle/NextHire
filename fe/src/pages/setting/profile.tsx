@@ -1,4 +1,4 @@
-import { useState, FC, ChangeEvent, FormEvent } from "react";
+import React, { useState, FC, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { User, Mail, Lock, Phone, Calendar, MapPin, Briefcase, Linkedin, Twitter, Github, Bell, Shield, Info, Edit2, Check } from "lucide-react";
 
@@ -357,7 +357,7 @@ const CreateProfile: FC = () => {
               type="checkbox"
               name="notificationsEnabled"
               label="Enable Notifications"
-              checked={formData.notificationsEnabled}
+              value={formData.notificationsEnabled}
               onChange={handleInputChange}
             />
             <FormField
@@ -401,7 +401,7 @@ const FormField: FC<{
   icon: JSX.Element;
   type: string;
   name: string;
-  placeholder: string;
+  placeholder?: string;
   value: string | boolean;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   error?: string;
@@ -466,13 +466,3 @@ const FormField: FC<{
 );
 
 export default CreateProfile;
-=======
-function Profile() {
-  return (
-    <div>
-      This is setting profile
-    </div>
-  )
-}
-
-export default Profile

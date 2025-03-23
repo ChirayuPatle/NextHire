@@ -51,7 +51,10 @@ const createAccount = async (data: CreateAccountType) => {
     refreshTokenSignOptions,
   );
 
-  const accessToken = signToken({ userId: user.id, sessionId: session.id });
+  const accessToken = signToken({
+    userId: user.id,
+    sessionId: session.id,
+  });
 
   return {
     user: {
@@ -129,7 +132,7 @@ const loginUser = async ({ email, password, userAgent }: LoginParams) => {
 };
 
 const refreshUserAccessToken = async (refreshToken: string) => {
-  const { payload } = verifyToken<RefreshTokenPayload>(refreshToken, {
+  const { payload } = verifyToken<{ sessionId: string }>(refreshToken, {
     secret: refreshTokenSignOptions.secret,
   });
 
@@ -139,7 +142,7 @@ const refreshUserAccessToken = async (refreshToken: string) => {
 
   const now = Date.now();
   const session = await prisma.session.findUnique({
-    where: { id: payload.sessionId },
+    where: { id: payload.sessionId.toString() },
   });
 
   if (!session || session.expiresAt.getTime() <= now) {
