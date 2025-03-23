@@ -5,27 +5,35 @@
   "private": true,
   "scripts": {
     "dev": "bun --hot run ./src/server.ts",
-		"build": "bunx tsc",
-		"lint:check": "eslint src/**/*.ts",
-		"lint:fix": "eslint src/**/*.ts --fix",
-		"format:check": "prettier --check .",
-		"format:write": "prettier --write .",
-		"pre-commit": "bun run lint:fix && bun run format:write"
+    "build": "bunx tsc",
+    "lint:check": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "pre-commit": "bun run lint:fix && bun run format:write",
+    "migrate": "prisma migrate dev",
+    "push": "prisma db push"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/bun": "latest",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.9",
+    "prisma": "^6.5.0"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.0",
+    "@prisma/client": "^6.5.0",
+    "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "zod": "^3.24.2"
   }
 }

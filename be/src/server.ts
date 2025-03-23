@@ -7,7 +7,10 @@ import errorHandler from './middlewares/error-handler';
 import catchErrors from './utils/catch-errors';
 
 // Routes Imports
-import geminiChatBotRouter from './routes/geminiai.routes';
+import authRouter from './routes/auth.route';
+import geminiChatBotRouter from './routes/geminiai.route';
+import RecruitmentSessionRouter from './routes/session.route';
+
 // Env variable
 const PORT = env.PORT;
 const NODE_ENV = env.NODE_ENV;
@@ -39,7 +42,9 @@ app.get(
   }),
 );
 
+app.use('/api/auth', authRouter);
 app.use('/api/ai', geminiChatBotRouter);
+app.use('/api/session', RecruitmentSessionRouter);
 
 /// Error handler middleware
 

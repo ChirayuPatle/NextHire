@@ -11,6 +11,8 @@ export const env = {
   NODE_ENV: getEnv('NODE_ENV'),
   GEMINI_API_KEY: getEnv('GEMINI_API_KEY'),
   GEMINI_PROJECT_NUMBER: getEnv('GEMINI_PROJECT_NUMBER'),
+  JWT_REFRESH_SECRET: getEnv('JWT_REFRESH_SECRET'),
+  JWT_SECRET: getEnv('JWT_SECRET'),
 };
 
 export default env;

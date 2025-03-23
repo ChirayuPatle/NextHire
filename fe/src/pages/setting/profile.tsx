@@ -466,3 +466,13 @@ const FormField: FC<{
 );
 
 export default CreateProfile;
+=======
+function Profile() {
+  return (
+    <div>
+      This is setting profile
+    </div>
+  )
+}
+
+export default Profile

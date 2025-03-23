@@ -275,3 +275,13 @@ const Algorithm = ({ className }: { className?: string }) => (
 );
 
 export default UserDashboard;
+=======
+function UserDashboard() {
+  return (
+    <div className="text-white">
+      This is user dashboard
+    </div>
+  )
+}
+
+export default UserDashboard
