@@ -56,33 +56,46 @@ const Auth = () => {
     toast.success("OTP sent to your email. Please check your inbox.");
   };
 
-  // Handle registration form submission
-  const handleRegistration = (data: any) => {
-    if (step === 1) {
-      // Validate registration form
-      if (data.password !== data.confirmPassword) {
-        toast.error("Passwords do not match");
-        return;
-      }
+ const handleRegistration = async (data: any) => {
+  setIsLoading(true);
 
-      if (data.password.length < 8) {
-        toast.error("Password must be at least 8 characters long");
-        return;
-      }
+  if (step === 1) {
+    // Validate registration form
+    if (!data.email || !data.password || !data.confirmPassword) {
+      toast.error("Please fill in all required fields");
+      setIsLoading(false);
+      return;
+    }
 
-      // Send OTP to the user's email
+    if (data.password !== data.confirmPassword) {
+      toast.error("Passwords do not match");
+      setIsLoading(false);
+      return;
+    }
+
+    if (data.password.length < 8) {
+      toast.error("Password must be at least 8 characters long");
+      setIsLoading(false);
+      return;
+    }
+
+    // Simulate an API call to send OTP
+    setTimeout(() => {
       sendOTP(data.email);
       setStep(2); // Move to OTP verification step
-    } else if (step === 2) {
-      // Verify OTP
-      if (data.otp === otp) {
-        toast.success("OTP verified successfully!");
-        navigate("/dashboard"); // Navigate to dashboard after successful verification
-      } else {
-        toast.error("Invalid OTP. Please try again.");
-      }
+      setIsLoading(false);
+    }, 1000);
+  } else if (step === 2) {
+    // Verify OTP
+    if (data.otp === otp) {
+      toast.success("OTP verified successfully!");
+      navigate(`/register?role=${role}`); // Navigate to registration page with role
+    } else {
+      toast.error("Invalid OTP. Please try again.");
     }
-  };
+    setIsLoading(false);
+  }
+};
 
   // Handle login form submission
   const handleLogin = (data: any) => {
@@ -187,10 +200,14 @@ const Auth = () => {
                 <div className="mt-6">
                   <button
                     type="submit"
-                    className="w-full p-3 rounded-lg bg-[#B967FF] text-white font-semibold hover:bg-[#8344B8] transition-colors"
+                    className="w-full p-3 rounded-lg bg-[#B967FF] text-white font-semibold hover:bg-[#8344B8] transition-colors flex items-center justify-center"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Verifying..." : "Verify OTP"}
+                    {isLoading ? (
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    ) : (
+                      "Verify OTP"
+                    )}
                   </button>
                 </div>
               </>
@@ -244,10 +261,14 @@ const Auth = () => {
                 <div className="mt-6">
                   <button
                     type="submit"
-                    className="w-full p-3 rounded-lg bg-[#B967FF] text-white font-semibold hover:bg-[#8344B8] transition-colors"
+                    className="w-full p-3 rounded-lg bg-[#B967FF] text-white font-semibold hover:bg-[#8344B8] transition-colors flex items-center justify-center"
                     disabled={isLoading}
                   >
-                    {authType === "login" ? "Sign In" : "Continue"}
+                    {isLoading ? (
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    ) : (
+                      authType === "login" ? "Sign In" : "Continue"
+                    )}
                   </button>
                 </div>
               </>
@@ -262,7 +283,7 @@ const Auth = () => {
               type="button"
               className="text-[#B967FF] hover:text-[#D4A5FF]"
               onClick={toggleAuthType}
-            >
+            > 
               {authType === "login" ? "Sign up" : "Sign in"}
             </button>
           </p>

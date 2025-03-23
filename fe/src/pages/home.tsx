@@ -245,7 +245,7 @@ const Index = () => {
               Join hundreds of companies using NextHire to find the best talent faster and with greater confidence.
             </p>
             <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <Link to="/auth?type=register&role=organization">
+              <Link to="/login">
               <Link to={'/login'}>
                 <Button variant="primary" size="lg" className="w-full sm:w-auto">
                   Get Started Free

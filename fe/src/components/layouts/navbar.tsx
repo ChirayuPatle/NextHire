@@ -193,8 +193,8 @@ const Navbar = ({
                 <Link to="/about" className="nav-link">About</Link>
                 <Link to="/contact" className="nav-link">Contact</Link>
                 <div className="pt-4 flex flex-col space-y-2">
-                  <Link to="/auth?type=login" className="button-secondary w-full text-center">Login</Link>
-                  <Link to="/auth?type=register" className="button-primary w-full text-center">Sign Up</Link>
+                  <Link to="/login" className="button-secondary w-full text-center">Login</Link>
+                  <Link to="/login" className="button-primary w-full text-center">Sign Up</Link>
                 </div>
               </>
             )}

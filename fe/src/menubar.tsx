@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 
+import { BarChart, LayoutDashboard, Menu, MessageCircleCode, MessageSquare, Settings, Users, X, ChartBar, User } from "lucide-react";
 
-import { BarChart, LayoutDashboard, Menu, Settings, User, Users,X, ChartBar, } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import chat from '../public/chat.png'

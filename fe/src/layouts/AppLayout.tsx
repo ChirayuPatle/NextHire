@@ -206,7 +206,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
                 <SidebarMenuButton 
                   onClick={() => {
                     logout();
-                    navigate("/auth");
+                    navigate("/");
                   }}
                   tooltip="Logout"
                   className="transition-all duration-200 hover:bg-red-500/20"
