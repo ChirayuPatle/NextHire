@@ -23,6 +23,7 @@ import UserDashboard from "./pages/user/userDashboard";
 import UserLayout from "./layouts/UserLayout";
 import UserSession from "./pages/user/userSession";
 
+
 const Feedback = lazy(() => import("./pages/feedback"));
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
         <Route path="/help" element={<HelpPage />} />
         <Route path="/privacy-settings" element={<PrivacySettings />} />
         <Route path="/location" element={<LocationSettings />} />
+
 
         {/* User pages */}
         <Route path="/user" element={<UserLayout />} >

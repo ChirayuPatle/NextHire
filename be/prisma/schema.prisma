@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String        @id @default(cuid())
+  email          String        @unique
+  password       String
+  verified       Boolean       @default(false)
+  role           UserRole      @default(CANDIDATE)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  details        Json?
+  candidate      Candidate?
+  candidateId    String?
+  organization   Organization?
+  organizationId String?
+
+  sessions          Session[]
+  verificationCodes VerificationCode[]
+}
+
+model Candidate {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  firstName String
+  lastName  String
+  resume    String?
+  skills    String[]
+  details   Json?
+}
+
+model Organization {
+  id          String               @id @default(cuid())
+  userId      String               @unique
+  user        User                 @relation(fields: [userId], references: [id])
+  name        String
+  industry    String
+  website     String?
+  address     String?
+  description String?
+  details     Json?
+  sessions    RecruitmentSession[]
+}
+
+model RecruitmentSession {
+  id             String       @id @default(cuid())
+  title          String
+  description    String?
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  details        Json?
+  rounds         Round[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model Round {
+  id          String             @id @default(cuid())
+  sessionId   String
+  session     RecruitmentSession @relation(fields: [sessionId], references: [id])
+  type        RoundType
+  title       String
+  description String?
+  details     Json?
+  startDate   DateTime
+  endDate     DateTime
+  status      RoundStatus        @default(SCHEDULED)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  userAgent String?
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model VerificationCode {
+  id        String   @id @default(cuid())
+  userId    String
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+enum UserRole {
+  CANDIDATE
+  ORGANIZATION
+}
+
+enum RoundType {
+  RESUME_SCREENING
+  APTITUDE_TEST
+  TECHNICAL_INTERVIEW
+  CODING_CHALLENGE
+  GROUP_DISCUSSION
+  HR_INTERVIEW
+  FINAL_INTERVIEW
+}
+
+enum RoundStatus {
+  SCHEDULED
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
