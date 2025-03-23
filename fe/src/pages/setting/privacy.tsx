@@ -15,7 +15,7 @@ const PrivacySettings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
+    <div className="min-h-screen bg-neutral-900 text-gray-100 p-8">
       {/* Header */}
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-8">
