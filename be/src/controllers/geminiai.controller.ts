@@ -22,7 +22,7 @@ const chatHandler = catchErrors(async (req, res) => {
   });
 
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const { userId, query } = req.body;
 
     if (!userId || !query) {

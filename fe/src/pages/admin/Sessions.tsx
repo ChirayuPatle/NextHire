@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -8,10 +7,10 @@ import { format } from "date-fns";
 import { useApp } from "@/context/AppContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DatePicker from "@/components/ui-custom/DatePicker";
+import DatePicker from "@/components/ui-custom/date-picker";
 import { Plus } from "lucide-react";
-import Card from "@/components/ui-custom/Card";
-import AppLayout from "@/components/layout/AppLayout";
+import Card from "@/components/ui-custom/card";
+import AppLayout from "@/components/layouts/AppLayout";
 import { toast } from "sonner";
 
 const Sessions = () => {
@@ -36,10 +35,7 @@ const Sessions = () => {
   };
 
   const handleCreateSession = () => {
-    // Generate a unique ID for the new session
     const newSessionId = `session_${Date.now()}`;
-    
-    // Create a new session object
     const newSession = {
       id: newSessionId,
       title: formData.title,
@@ -55,15 +51,10 @@ const Sessions = () => {
       quizzes: [],
       interviews: []
     };
-    
-    // Add the new session to localStorage
+
     const currentSessions = JSON.parse(localStorage.getItem('nexthire_sessions') || '[]');
     localStorage.setItem('nexthire_sessions', JSON.stringify([...currentSessions, newSession]));
-    
-    // Refresh the sessions data
     refreshData();
-    
-    // Reset the form
     setFormData({
       title: "",
       description: "",
@@ -73,28 +64,26 @@ const Sessions = () => {
       startDate: new Date(),
       endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
     });
-    
-    // Close the dialog
     setIsDialogOpen(false);
-    
     toast.success('Session created successfully');
   };
 
   return (
     <AppLayout>
-      <div className="flex justify-between items-center mb-8">
+      <div className="px-10 mt-[4.5rem]">
+        <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-white">Interview Sessions</h1>
-          <p className="text-nexthire-text-gray">Manage your recruitment sessions</p>
+          <h1 className="text-3xl font-bold text-[#FFFFFF]">Interview Sessions</h1>
+          <p className="text-[#ABABAB]">Manage your recruitment sessions</p>
         </div>
         
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-nexthire-purple hover:bg-nexthire-dark-purple">
+            <Button className="bg-[#B967FF] hover:bg-[#8344B8]">
               <Plus className="mr-2 h-4 w-4" /> Create Session
             </Button>
           </DialogTrigger>
-          <DialogContent className="bg-nexthire-card-gray text-white border-nexthire-light-gray">
+          <DialogContent className="bg-[#252525] text-white border-[#2F2F2F]">
             <DialogHeader>
               <DialogTitle className="text-xl font-bold">Create New Session</DialogTitle>
             </DialogHeader>
@@ -178,7 +167,7 @@ const Sessions = () => {
             
             <div className="flex justify-end gap-2">
               <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
-              <Button className="bg-nexthire-purple hover:bg-nexthire-dark-purple" onClick={handleCreateSession}>Create Session</Button>
+              <Button className="bg-[#B967FF] hover:bg-[#8344B8]" onClick={handleCreateSession}>Create Session</Button>
             </div>
           </DialogContent>
         </Dialog>
@@ -188,25 +177,24 @@ const Sessions = () => {
         {sessions.map((session) => (
           <Card 
             key={session.id} 
-            className="hover:border-nexthire-purple transition-colors duration-300"
-            isHoverable
+            className="hover:border-[#B967FF] border-[1px] border-transparent cursor-pointer hover:border-[1px] bg-neutral-800/90 text-white transition-colors duration-300"
           >
             <div className="flex flex-col h-full">
               <h2 className="text-xl font-bold mb-2">{session.title}</h2>
-              <p className="text-nexthire-text-gray text-sm mb-4 flex-grow">{session.description}</p>
+              <p className="text-[#ABABAB] text-sm mb-4 flex-grow">{session.description}</p>
               
               <div className="flex flex-wrap gap-2 mb-4">
                 {Array.isArray(session.skills) && session.skills.map((skill, index) => (
                   <span 
                     key={index} 
-                    className="bg-nexthire-dark-purple text-white text-xs px-2 py-1 rounded-full"
+                    className="bg-[#8344B8] text-white text-xs px-2 py-1 rounded-full"
                   >
                     {skill}
                   </span>
                 ))}
               </div>
               
-              <div className="text-sm text-nexthire-text-gray mb-4">
+              <div className="text-sm text-[#ABABAB] mb-4">
                 <div className="flex justify-between mb-1">
                   <span>Start Date:</span>
                   <span>{format(new Date(session.startDate), 'MMM dd, yyyy')}</span>
@@ -223,8 +211,8 @@ const Sessions = () => {
               
               <div className="mt-auto">
                 <Button 
-                  className="w-full bg-nexthire-purple hover:bg-nexthire-dark-purple"
-                  onClick={() => navigate(`/session/${session.id}`)}
+                  className="w-full bg-[#B967FF] hover:bg-[#8344B8]"
+                  onClick={() => navigate(`/dashboard/sessions/${session.id}`)}
                 >
                   View Details
                 </Button>
@@ -236,10 +224,11 @@ const Sessions = () => {
       
       {sessions.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-nexthire-text-gray text-lg">No sessions found</p>
-          <p className="text-nexthire-text-gray">Create your first interview session to get started</p>
+          <p className="text-[#ABABAB] text-lg">No sessions found</p>
+          <p className="text-[#ABABAB]">Create your first interview session to get started</p>
         </div>
       )}
+      </div>
     </AppLayout>
   );
 };

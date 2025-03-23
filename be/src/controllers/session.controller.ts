@@ -78,8 +78,34 @@ const getSessionByIdHandler = catchErrors(
   },
 );
 
+const deleteSessionHandler = catchErrors(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { organizationId } = req.query;
+
+    appAssert(id, BAD_REQUEST, 'Session ID is required');
+    appAssert(organizationId, BAD_REQUEST, 'Organization ID is required');
+
+    const session = await prisma.recruitmentSession.findFirst({
+      where: {
+        id,
+        organizationId: organizationId as string,
+      },
+    });
+
+    appAssert(session, BAD_REQUEST, 'Session not found');
+
+    await prisma.recruitmentSession.delete({
+      where: { id },
+    });
+
+    return res.status(OK).json({ message: 'Session deleted successfully' });
+  },
+);
+
 export {
   createSessionHandler,
   getOrganizationSessionsHandler,
   getSessionByIdHandler,
+  deleteSessionHandler,
 };
