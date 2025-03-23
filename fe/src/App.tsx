@@ -6,7 +6,7 @@ import AppLayout from "./layouts/dashboard-layout";
 import AiChat from "./pages/aiChat";
 import NextHireDashboard from "./pages/analysis";
 import CodeEditor from "./pages/code/code-editor";
-import Dashboard, { CandidateDashboard } from "./pages/dashboard/dashboard";
+import Dashboard from "./pages/dashboard/dashboard";
 import Home from "./pages/home";
 import Quiz from "./pages/interRound1";
 import Login from "./pages/auth/page";
@@ -19,9 +19,11 @@ import TeamDetails from "./pages/teamDetails";
 import PrivacySettings from "./pages/setting/privacy";
 import HelpPage from "./pages/setting/help";
 import LocationSettings from "./pages/setting/location";
-import UserDashboard from "./pages/user/userDashboard";
 import UserLayout from "./layouts/UserLayout";
 import UserSession from "./pages/user/userSession";
+import CreateProfile from "./pages/createProfile";
+import UserProfileCard from "./pages/display-profile";
+import UserDashboard from "./pages/dashboard/dashboard";
 
 
 const Feedback = lazy(() => import("./pages/feedback"));
@@ -65,6 +67,8 @@ function App() {
         <Route path="/help" element={<HelpPage />} />
         <Route path="/privacy-settings" element={<PrivacySettings />} />
         <Route path="/location" element={<LocationSettings />} />
+        <Route path="/create-profile" element={<CreateProfile />} />
+        <Route path="/view-profile" element={<UserProfileCard />} />
 
 
         {/* User pages */}
@@ -75,7 +79,7 @@ function App() {
           {/* <Route path="/settings" element={<Settings />} /> */}
         </Route> 
 
-      <Route path="/user-dashboard" element={<CandidateDashboard />} ></Route>
+      <Route path="/user-dashboard" element={<UserDashboard />} ></Route>
 
     </Routes>
   );

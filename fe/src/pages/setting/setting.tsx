@@ -36,7 +36,7 @@ const Settings: FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>("profile");
 
   const menuItems: { key: Tab; label: string; icon: JSX.Element; path: string }[] = [
-    { key: "profile", label: "Profile", icon: <User size={20} />, path: "/settings/profile" },
+    { key: "profile", label: "Profile", icon: <User size={20} />, path: "/create-profile" },
     // { key: "edit", label: "Edit Profile", icon: <Edit2 size={20} />, path: "/settings/edit" },
     // { key: "notifications", label: "Notifications", icon: <Bell size={20} />, path: "/settings/notifications" },
     { key: "location", label: "Location", icon: <MapPin size={20} />, path: "/location" },

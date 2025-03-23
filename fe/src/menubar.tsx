@@ -1,4 +1,6 @@
+
 import { BarChart, LayoutDashboard, Menu, MessageCircleCode, MessageSquare, Settings, Users, X, ChartBar, User } from "lucide-react";
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from '../public/logo.png';
@@ -58,7 +60,9 @@ const Menubar: React.FC = () => {
           </Link>
           
           {/* Profile Section */}
-          <SidebarItem to="/profile" icon={<User size={20} />} label="Profile" isActive={location.pathname === "/profile"} />
+
+          <SidebarItem to="/view-profile" icon={<User size={20} />} label="Profile" isActive={location.pathname === "/profile"} />
+
         </div>
       </aside>
 
