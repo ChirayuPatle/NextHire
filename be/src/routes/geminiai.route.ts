@@ -1,6 +1,6 @@
 // prefix: /ai
 import { Router } from 'express';
-import { chatHandler } from '../controllers/geminiai.controllers';
+import { chatHandler } from '../controllers/geminiai.controller';
 
 const router = Router();
 
