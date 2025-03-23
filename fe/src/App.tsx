@@ -65,6 +65,11 @@ function App() {
         <Route path="sessions" element={<Sessions />} ></Route>
         <Route path="sessions/:id" element={<SessionDetail />} ></Route>
       </Route>  
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/manage-settings" element={<ManageAccount />} />
+        <Route path="/help" element={<HelpPage />} />
+        <Route path="/privacy-settings" element={<PrivacySettings />} />
+        <Route path="/location" element={<LocationSettings />} />
 
       {/* Setting pages */}
         <Route path="/settings" element={<Settings />} />
