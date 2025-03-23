@@ -45,7 +45,7 @@ const Settings: FC = () => {
     // { key: "data", label: "Data Sharing", icon: <Share2 size={20} />, path: "/settings/data" },
     // { key: "activity", label: "Activity Status", icon: <Activity size={20} />, path: "/settings/activity" },
     { key: "help", label: "Help Center", icon: <LifeBuoy size={20} />, path: "/help" },
-    { key: "manage", label: "Manage Account", icon: <SettingsIcon size={20} />, path: "/manage-settings" },
+    // { key: "manage", label: "Manage Account", icon: <SettingsIcon size={20} />, path: "/manage-settings" },
     // { key: "logout", label: "Logout", icon: <LogOut size={20} />, path: "/logout" },
   ];
 

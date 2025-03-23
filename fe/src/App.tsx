@@ -25,7 +25,8 @@ import UserLayout from "./layouts/UserLayout";
 import UserSession from "./pages/user/userSession";
 import CreateProfile from "./pages/createProfile";
 import UserProfileCard from "./pages/display-profile";
-import UserDashboard from "./pages/dashboard/dashboard";
+import UserDashboard from "./pages/user/userDashboard";
+import UserMenubar from "./pages/user/userMenubar";
 
 
 const Feedback = lazy(() => import("./pages/feedback"));
@@ -73,6 +74,7 @@ function App() {
         <Route path="/location" element={<LocationSettings />} />
         <Route path="/create-profile" element={<CreateProfile />} />
         <Route path="/view-profile" element={<UserProfileCard />} />
+        <Route path="/user-menubar" element={<UserMenubar />} />
 
 
         {/* User pages */}
