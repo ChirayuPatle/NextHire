@@ -66,7 +66,11 @@ const logoutCandidateHandler = catchErrors(
 
     if (payload) {
       await prisma.session.delete({
-        where: { id: (payload as { sessionId: number }).sessionId },
+        where: {
+          id: (
+            payload as unknown as { sessionId: number }
+          ).sessionId.toString(),
+        },
       });
     }
 
@@ -130,7 +134,9 @@ const logoutOrgHandler = catchErrors(async (req: Request, res: Response) => {
 
   if (payload) {
     await prisma.session.delete({
-      where: { id: (payload as { sessionId: number }).sessionId },
+      where: {
+        id: (payload as unknown as { sessionId: number }).sessionId.toString(),
+      },
     });
   }
 

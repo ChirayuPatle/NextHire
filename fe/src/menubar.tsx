@@ -1,18 +1,8 @@
-<<<<<<< HEAD
-
-import { BarChart, LayoutDashboard, Menu, MessageCircleCode, MessageSquare, Settings, Users, X, ChartBar, User } from "lucide-react";
-
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import chat from '../public/chat.png'
-import logo from '../public/logo.png'
-=======
 import { BarChart, LayoutDashboard, Menu, MessageCircleCode, MessageSquare, Settings, Users, X, ChartBar, User } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from '../public/logo.png';
 import chat from '../public/chat.png';
->>>>>>> a6ae3ed (WIP)
 
 const Menubar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,14 +50,6 @@ const Menubar: React.FC = () => {
         <div className="space-y-4">
           {/* Profile Image */}
           <Link to={'/aichat'}>
-<<<<<<< HEAD
-          <div className="flex flex-col space-y-2">
-            <img src={chat} alt="Profile" className="w-12 h-12" />
-          </div>
-          </Link>
-          {/* Profile Section */}
-          <SidebarItem to="/view-profile" icon={<User size={20} />} label="Profile" isActive={location.pathname === "/profile"} />
-=======
           <div className="flex flex-col items-center space-y-2">
             <img src={chat} alt="Profile" className="w-16 h-16" />
             <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition">Next AI</button>
@@ -76,7 +58,6 @@ const Menubar: React.FC = () => {
           
           {/* Profile Section */}
           <SidebarItem to="/profile" icon={<User size={20} />} label="Profile" isActive={location.pathname === "/profile"} />
->>>>>>> a6ae3ed (WIP)
         </div>
       </aside>
 

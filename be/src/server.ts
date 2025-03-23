@@ -26,9 +26,10 @@ app.use(
 );
 app.use(
   cors({
-    //TODO: need to add ORIGIN_URL of our frontend
-    origin: `http://localhost:5173`,
+    origin: 'http://localhost:5173', // Your frontend URL
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   }),
 );
 app.use(cookieParser());

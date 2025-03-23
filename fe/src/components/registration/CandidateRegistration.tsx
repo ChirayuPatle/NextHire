@@ -17,7 +17,7 @@ interface CandidateRegistrationProps {
 const CandidateRegistration = ({ onSubmit, onBack }: CandidateRegistrationProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(1);
-  const navigate = useNavigate();
+  const [errors, setErrors] = useState<{ [key: string]: string }>({}); // State for errors
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -25,36 +25,17 @@ const CandidateRegistration = ({ onSubmit, onBack }: CandidateRegistrationProps)
   const [skillInput, setSkillInput] = useState("");
   const [resume, setResume] = useState<File | null>(null);
 
-  const handleAddSkill = () => {
-    if (skillInput.trim() && !skills.includes(skillInput.trim())) {
-      setSkills([...skills, skillInput.trim()]);
-      setSkillInput("");
-    }
+  const validateStep1 = () => {
+    const newErrors: { [key: string]: string } = {};
+    if (!firstName) newErrors.firstName = "First name is required";
+    if (!lastName) newErrors.lastName = "Last name is required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleAddSkill();
-    }
-  };
-
-  const handleRemoveSkill = (skillToRemove: string) => {
-    setSkills(skills.filter((skill) => skill !== skillToRemove));
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setResume(e.target.files[0]);
-    }
-  };
-
+  
+  const navigate = useNavigate();
   const handleNextStep = () => {
-    if (!firstName || !lastName) {
-      toast.error("Please fill in all required fields");
-      return;
-    }
-
+    if (!validateStep1()) return;
     setStep(2);
   };
 
@@ -76,7 +57,7 @@ const CandidateRegistration = ({ onSubmit, onBack }: CandidateRegistrationProps)
         resume: resume || undefined,
       });
       toast.success("Registration successful!");
-      navigate("/dashboard"); // Redirect to dashboard after successful registration
+      navigate("/dashboard");
     } catch (error) {
       console.error("Registration error:", error);
       toast.error("Registration failed. Please try again.");
@@ -116,6 +97,7 @@ const CandidateRegistration = ({ onSubmit, onBack }: CandidateRegistrationProps)
                 onChange={(e) => setFirstName(e.target.value)}
                 required
               />
+              {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
             </div>
 
             <div>
@@ -133,6 +115,7 @@ const CandidateRegistration = ({ onSubmit, onBack }: CandidateRegistrationProps)
                 onChange={(e) => setLastName(e.target.value)}
                 required
               />
+              {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
             </div>
           </div>
 
@@ -146,81 +129,7 @@ const CandidateRegistration = ({ onSubmit, onBack }: CandidateRegistrationProps)
 
       {step === 2 && (
         <>
-          <div className="mb-4">
-            <div className="flex items-center mb-2">
-              <BookOpen className="h-4 w-4 mr-2 text-[#B967FF]" />
-              <label htmlFor="skills" className="text-[#ABABAB]">
-                Skills
-              </label>
-            </div>
-            <div className="flex">
-              <input
-                type="text"
-                id="skills"
-                className="flex-grow bg-[#2F2F2F] border border-[#2F2F2F] text-[#FFFFFF] rounded-md px-3 py-2"
-                value={skillInput}
-                onChange={(e) => setSkillInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Add a skill and press Enter"
-              />
-              <button
-                type="button"
-                className="ml-2 px-4 py-2 bg-[#2F2F2F] text-[#FFFFFF] rounded-md hover:bg-[#252525]"
-                onClick={handleAddSkill}
-              >
-                Add
-              </button>
-            </div>
-
-            {skills.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-3">
-                {skills.map((skill, index) => (
-                  <span
-                    key={index}
-                    className="bg-[#8344B8] bg-opacity-20 text-[#B967FF] px-3 py-1 rounded-full flex items-center"
-                  >
-                    {skill}
-                    <button
-                      type="button"
-                      className="ml-2 text-[#B967FF] hover:text-[#FFFFFF] focus:outline-none"
-                      onClick={() => handleRemoveSkill(skill)}
-                    >
-                      &times;
-                    </button>
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="mb-6">
-            <div className="flex items-center mb-2">
-              <FileText className="h-4 w-4 mr-2 text-[#B967FF]" />
-              <label htmlFor="resume" className="text-[#ABABAB]">
-                Resume (Optional)
-              </label>
-            </div>
-            <input
-              type="file"
-              id="resume"
-              className="hidden"
-              accept=".pdf,.doc,.docx"
-              onChange={handleFileChange}
-            />
-            <div className="flex items-center">
-              <div className="flex-1 bg-[#2F2F2F] bg-opacity-50 border border-[#2F2F2F] border-dashed rounded-md p-3 text-[#ABABAB]">
-                {resume ? resume.name : "No file selected"}
-              </div>
-              <label
-                htmlFor="resume"
-                className="ml-2 cursor-pointer bg-[#2F2F2F] hover:bg-[#252525] text-[#FFFFFF] px-4 py-2 rounded-md"
-              >
-                Browse
-              </label>
-            </div>
-            <p className="text-[#ABABAB] text-xs mt-1">Supported formats: PDF, DOC, DOCX</p>
-          </div>
-
+          {/* Step 2 form fields */}
           <div className="flex justify-end mt-6">
             <Button type="button" onClick={() => setStep(1)} className="mr-2">
               Previous

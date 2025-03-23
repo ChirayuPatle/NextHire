@@ -1,8 +1,20 @@
 // auth.schemas.ts
 import { z } from 'zod';
 
-const emailSchema = z.string().email().min(1).max(255);
-const passwordSchema = z.string().min(6).max(255);
+const emailSchema = z
+  .string()
+  .email('Invalid email format')
+  .min(1, 'Email is required')
+  .max(255, 'Email must be less than 255 characters');
+
+const passwordSchema = z
+  .string()
+  .min(8, 'Password must be at least 8 characters')
+  .max(255, 'Password must be less than 255 characters')
+  .regex(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character',
+  );
 
 const AuthBaseSchema = z.object({
   userAgent: z.string().optional(),
@@ -10,36 +22,34 @@ const AuthBaseSchema = z.object({
 
 export const LoginCandidateSchema = AuthBaseSchema.extend({
   email: emailSchema,
-  password: passwordSchema,
+  password: z.string().min(1, 'Password is required'),
 });
 
 export const RegisterCandidateSchema = AuthBaseSchema.extend({
   email: emailSchema,
   password: passwordSchema,
-  confirmPassword: z.string().min(6).max(255),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: 'Passwords do not match',
-  path: ['confirmPassword'],
 });
 
 export const RegisterOrgSchema = AuthBaseSchema.extend({
   email: emailSchema,
   password: passwordSchema,
-  confirmPassword: z.string().min(6).max(255),
-  name: z.string().min(2).max(100),
-  industry: z.string().min(2).max(100),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: 'Passwords do not match',
-  path: ['confirmPassword'],
+  name: z
+    .string()
+    .min(2, 'Name must be at least 2 characters')
+    .max(100, 'Name must be less than 100 characters'),
+  industry: z
+    .string()
+    .min(2, 'Industry must be at least 2 characters')
+    .max(100, 'Industry must be less than 100 characters'),
 });
 
 export const LoginOrgSchema = AuthBaseSchema.extend({
   email: emailSchema,
-  password: passwordSchema,
+  password: z.string().min(1, 'Password is required'),
 });
 
 export const UserSchema = z.object({
-  email: z.string().email(),
+  email: emailSchema,
   organizationId: z.string().optional(),
   candidateId: z.string().optional(),
 });

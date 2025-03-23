@@ -15,8 +15,9 @@ interface OrganizationRegistrationProps {
 }
 
 const OrganizationRegistration = ({ onSubmit, onBack }: OrganizationRegistrationProps) => {
-  const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [step, setStep] = useState(1);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({}); // State for errors
 
   const [name, setName] = useState("");
   const [industry, setIndustry] = useState("");
@@ -24,20 +25,16 @@ const OrganizationRegistration = ({ onSubmit, onBack }: OrganizationRegistration
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleBack = () => {
-    if (step > 1) {
-      setStep(step - 1);
-    } else {
-      onBack();
-    }
+  const validateStep1 = () => {
+    const newErrors: { [key: string]: string } = {};
+    if (!name) newErrors.name = "Organization name is required";
+    if (!industry) newErrors.industry = "Industry is required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleNext = () => {
-    if (!name || !industry) {
-      toast.error("Please fill in all required fields");
-      return;
-    }
-
+  const handleNextStep = () => {
+    if (!validateStep1()) return;
     setStep(2);
   };
 
@@ -69,43 +66,20 @@ const OrganizationRegistration = ({ onSubmit, onBack }: OrganizationRegistration
   };
 
   return (
-    <div>
+    <form className="text-white" onSubmit={handleSubmit}>
       <div className="mb-6">
-        <div className="flex items-center mb-4">
-          <button
-            type="button"
-            className="flex items-center text-[#ABABAB] hover:text-[#FFFFFF] mr-4"
-            onClick={handleBack}
-          >
-            <ArrowLeft className="h-4 w-4 mr-1" />
-            Back
-          </button>
-          <div className="flex-1 flex items-center">
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                step >= 1 ? "bg-[#B967FF]" : "bg-[#2F2F2F]"
-              } mr-2`}
-            >
-              <span className="text-[#FFFFFF] text-sm">1</span>
-            </div>
-            <div
-              className={`h-1 flex-1 ${
-                step > 1 ? "bg-[#B967FF]" : "bg-[#2F2F2F]"
-              }`}
-            ></div>
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                step >= 2 ? "bg-[#B967FF]" : "bg-[#2F2F2F]"
-              } ml-2`}
-            >
-              <span className="text-[#FFFFFF] text-sm">2</span>
-            </div>
-          </div>
-        </div>
+        <button
+          type="button"
+          className="flex items-center text-[#ABABAB] hover:text-[#FFFFFF] mb-4"
+          onClick={onBack}
+        >
+          <ArrowLeft className="h-4 w-4 mr-1" />
+          Back
+        </button>
       </div>
 
       {step === 1 && (
-        <form onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
+        <>
           <div className="mb-4">
             <div className="flex items-center mb-2">
               <BuildingIcon className="h-4 w-4 mr-2 text-[#B967FF]" />
@@ -122,6 +96,7 @@ const OrganizationRegistration = ({ onSubmit, onBack }: OrganizationRegistration
               placeholder="e.g., Acme Corporation"
               required
             />
+            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
           </div>
 
           <div className="mb-4">
@@ -146,6 +121,7 @@ const OrganizationRegistration = ({ onSubmit, onBack }: OrganizationRegistration
               <option value="Consulting">Consulting</option>
               <option value="Other">Other</option>
             </select>
+            {errors.industry && <p className="text-red-500 text-sm mt-1">{errors.industry}</p>}
           </div>
 
           <div className="mb-6">
@@ -166,13 +142,15 @@ const OrganizationRegistration = ({ onSubmit, onBack }: OrganizationRegistration
           </div>
 
           <div className="flex justify-end mt-6">
-            <Button type="submit">Continue</Button>
+            <Button type="button" onClick={handleNextStep}>
+              Next
+            </Button>
           </div>
-        </form>
+        </>
       )}
 
       {step === 2 && (
-        <form onSubmit={handleSubmit}>
+        <>
           <div className="mb-4">
             <div className="flex items-center mb-2">
               <MapPin className="h-4 w-4 mr-2 text-[#B967FF]" />
@@ -207,17 +185,17 @@ const OrganizationRegistration = ({ onSubmit, onBack }: OrganizationRegistration
             />
           </div>
 
-          <div className="flex justify-between mt-6">
-            <Button type="button" variant="ghost" onClick={handleBack}>
-              Back
+          <div className="flex justify-end mt-6">
+            <Button type="button" onClick={() => setStep(1)} className="mr-2">
+              Previous
             </Button>
             <Button type="submit" isLoading={isLoading}>
               Complete Registration
             </Button>
           </div>
-        </form>
+        </>
       )}
-    </div>
+    </form>
   );
 };
 

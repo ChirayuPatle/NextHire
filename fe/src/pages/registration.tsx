@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import Card from "@/components/ui-custom/card";
 import OrganizationRegistration from "@/components/registration/OrganizationRegistration";
 import CandidateRegistration from "@/components/registration/CandidateRegistration";
+import OTPVerification from "@/components/OTPVerification"; // Assuming you have an OTP component
 
 export type UserRole = "CANDIDATE" | "ORGANIZATION";
 
@@ -12,10 +13,14 @@ const Registration = () => {
   const navigate = useNavigate();
 
   const [userRole, setUserRole] = useState<UserRole>("CANDIDATE");
+  const [showOTP, setShowOTP] = useState(false); // State to control OTP visibility
 
   useEffect(() => {
     const role = searchParams.get("role");
-    if (role === "ORGANIZATION") {
+
+    console.log("USE-EFFECT", role)
+
+    if (role === "ORGANIZATION" || role === "ORGANIZATION".toLowerCase()   ) {
       setUserRole("ORGANIZATION");
     } else {
       setUserRole("CANDIDATE");
@@ -24,6 +29,16 @@ const Registration = () => {
 
   const handleBack = () => {
     navigate("/auth");
+  };
+
+  const handleOTPVerification = () => {
+    // Simulate OTP verification
+    setShowOTP(true);
+  };
+
+  const handleOTPComplete = () => {
+    // After OTP verification, show the appropriate registration form
+    setShowOTP(false);
   };
 
   const handleSubmit = (formData: {
@@ -41,6 +56,8 @@ const Registration = () => {
     toast.success("Registration successful!");
     navigate("/dashboard");
   };
+
+  console.log("ROLE: ", userRole)
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[#121212]">
@@ -66,19 +83,23 @@ const Registration = () => {
           </p>
         </div>
 
-        <Card variant="glass" className="animate-slide-in shadow-xl">
-          {userRole === "ORGANIZATION" ? (
-            <OrganizationRegistration
-              onSubmit={handleSubmit}
-              onBack={handleBack}
-            />
-          ) : (
-            <CandidateRegistration
-              onSubmit={handleSubmit}
-              onBack={handleBack}
-            />
-          )}
-        </Card>
+        {showOTP ? (
+          <OTPVerification onComplete={handleOTPComplete} />
+        ) : (
+          <Card variant="glass" className="animate-slide-in shadow-xl p-6">
+            {userRole === "ORGANIZATION" || userRole === "ORGANIZATION".toLowerCase()  ? (
+              <OrganizationRegistration
+                onSubmit={handleSubmit}
+                onBack={handleBack}
+              />
+            ) : (
+              <CandidateRegistration
+                onSubmit={handleSubmit}
+                onBack={handleBack}
+              />
+            )}
+          </Card>
+        )}
 
         <div className="text-center mt-6 animate-fade-in">
           <p className="text-[#ABABAB]">
