@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import ManageAccount from "./pages/setting/manageSetting";
 
 import AppLayout from "./layouts/dashboard-layout";
 import AiChat from "./pages/aiChat";
@@ -15,6 +16,9 @@ import Settings from "./pages/setting/setting";
 import TeamChat from "./pages/teamChat";
 import VideoRoom from "./pages/video/video-room";
 import TeamDetails from "./pages/teamDetails";
+import PrivacySettings from "./pages/setting/privacy";
+import HelpPage from "./pages/setting/help";
+import LocationSettings from "./pages/setting/location";
 
 const Feedback = lazy(() => import("./pages/feedback"));
 
@@ -59,6 +63,10 @@ function App() {
         <Route path="teamchat" element={<TeamChat />} />
       </Route>  
         <Route path="/settings" element={<Settings />} />
+        <Route path="/manage-settings" element={<ManageAccount />} />
+        <Route path="/help" element={<HelpPage />} />
+        <Route path="/privacy-settings" element={<PrivacySettings />} />
+        <Route path="/location" element={<LocationSettings />} />
 
       <Route path="/user-dashboard" element={<CandidateDashboard />} ></Route>
 

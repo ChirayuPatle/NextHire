@@ -80,7 +80,7 @@ export const TeamDetails: React.FC = () => {
 
   return (
       <div className="w-full h-full mx-auto bg-neutral-950 text-neutral-100 rounded-lg p-6">
-        <h1 className="text-3xl font-bold mb-4 text-white">Team</h1>
+        <h1 className="text-3xl font-bold mb-4 text-white">Candidates</h1>
 
         {/* Search and Filter */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
