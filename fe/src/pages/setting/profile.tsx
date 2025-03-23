@@ -1,4 +1,4 @@
-function EditProfile() {
+function Profile() {
   return (
     <div>
       This is setting profile
@@ -6,4 +6,4 @@ function EditProfile() {
   )
 }
 
-export default EditProfile
+export default Profile
