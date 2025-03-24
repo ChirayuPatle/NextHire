@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from '../public/logo.png';
 import chat from '../public/chat.png';
+import ChatApp from "./pages/chat";
 
 const Menubar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +41,7 @@ const Menubar: React.FC = () => {
               <SidebarItem to="/dashboard" icon={<LayoutDashboard size={20} />} label="Dashboard" isActive={location.pathname === "/dashboard"} />
               <SidebarItem to="/dashboard/team" icon={<Users size={20} />} label="Candidates" isActive={location.pathname === "/dashboard/team"} />
               <SidebarItem to="/dashboard/analysis" icon={<BarChart size={20} />} label="Analysis" isActive={location.pathname === "/dashboard/analysis"} />
-              {/* <SidebarItem to="/dashboard/aichat" icon={<ChartBar size={20} />} label="Aichat" isActive={location.pathname === "/dashboard/aichat"} /> */}
+              {/* <SidebarItem to="/dashboard/chat" icon={<BarChart size={20}/>} label="Chat" isActive={location.pathname === "/chat"} /> */}
               <SidebarItem to="/settings" icon={<Settings size={20} />} label="Settings" isActive={location.pathname === "/dashboard/settings"} />
             </ul>
           </nav>
@@ -50,9 +51,8 @@ const Menubar: React.FC = () => {
         <div className="space-y-4">
           {/* Profile Image */}
           <Link to={'/aichat'}>
-          <div className="flex flex-col items-center space-y-2">
-            <img src={chat} alt="Profile" className="w-16 h-16" />
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition">Next AI</button>
+          <div className="flex flex-col space-y-2">
+            <img src={chat} alt="Profile" className="w-12 h-12" />
           </div>
           </Link>
           

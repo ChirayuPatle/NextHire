@@ -40,7 +40,7 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="animate-[fade-in_0.3s_ease-out] text-white mt-[27rem]">
+    <div className="animate-[fade-in_0.3s_ease-out] text-white mt-[5rem]">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white">Dashboard</h1>
         <p className="text-[#ABABAB]">Manage your recruitment process and track candidates.</p>
@@ -235,29 +235,6 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* Performance Insights */}
-      <div className="mt-8">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-white">Performance Insights</h2>
-          <Link to="/analytics">
-            <Button variant="ghost" size="sm">
-              View Analytics
-            </Button>
-          </Link>
-        </div>
-
-        <Card className="h-64 flex items-center justify-center">
-          <div className="text-center">
-            <BarChart2 className="h-10 w-10 text-[#B967FF] mx-auto mb-4" />
-            <p className="text-[#ABABAB] mb-3">Analytics dashboard will be displayed here</p>
-            <Link to="/dashboard/analysis">
-              <Button variant="outline" size="sm">
-                View Detailed Analytics
-              </Button>
-            </Link>
-          </div>
-        </Card>
-      </div>
     </div>
   );
 };
