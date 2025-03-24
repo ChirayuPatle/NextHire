@@ -1,8 +1,22 @@
 import { useState, FC, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Mail, Lock, Phone, Calendar, MapPin, Briefcase, Linkedin, Twitter, Github, Bell, Shield, Info, Edit2, Check } from "lucide-react";
+import {
+  User,
+  Mail,
+  Lock,
+  Phone,
+  Calendar,
+  MapPin,
+  Briefcase,
+  Linkedin,
+  Twitter,
+  Github,
+  Shield,
+  Info,
+  Plus,
+  Check,
+} from "lucide-react";
 
-// Define types for profile data
 interface Profile {
   fullName: string;
   username: string;
@@ -22,14 +36,11 @@ interface Profile {
   linkedin: string;
   twitter: string;
   github: string;
-  notificationsEnabled: boolean;
   privacySettings: string;
 }
 
 const CreateProfile: FC = () => {
   const navigate = useNavigate();
-
-  // State for form fields
   const [formData, setFormData] = useState<Profile>({
     fullName: "",
     username: "",
@@ -49,112 +60,106 @@ const CreateProfile: FC = () => {
     linkedin: "",
     twitter: "",
     github: "",
-    notificationsEnabled: true,
     privacySettings: "public",
   });
 
-  // State for validation and feedback
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [successMessage, setSuccessMessage] = useState<string>("");
 
-  // Handle input changes
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ): void => {
     const { name, value, type } = e.target;
-
     if (type === "checkbox") {
-      setFormData({ ...formData, [name]: (e.target as HTMLInputElement).checked });
+      setFormData({
+        ...formData,
+        [name]: (e.target as HTMLInputElement).checked,
+      });
     } else {
       setFormData({ ...formData, [name]: value });
     }
   };
 
-  // Handle profile picture upload (simulated)
-  const handleProfilePictureChange = (e: ChangeEvent<HTMLInputElement>): void => {
+  const handleProfilePictureChange = (
+    e: ChangeEvent<HTMLInputElement>,
+  ): void => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       const reader = new FileReader();
       reader.onload = (event) => {
         if (event.target) {
-          setFormData({ ...formData, profilePicture: event.target.result as string });
+          setFormData({
+            ...formData,
+            profilePicture: event.target.result as string,
+          });
         }
       };
       reader.readAsDataURL(file);
     }
   };
 
-  // Validate form fields
   const validateForm = (): boolean => {
     const newErrors: { [key: string]: string } = {};
-
-    if (!formData.fullName) {
-      newErrors.fullName = "Full Name is required.";
-    }
-
-    if (!formData.username) {
-      newErrors.username = "Username is required.";
-    }
-
+    if (!formData.fullName) newErrors.fullName = "Full Name is required.";
+    if (!formData.username) newErrors.username = "Username is required.";
     if (!formData.email) {
       newErrors.email = "Email is required.";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email is invalid.";
     }
-
     if (!formData.password) {
       newErrors.password = "Password is required.";
     } else if (formData.password.length < 8) {
       newErrors.password = "Password must be at least 8 characters.";
     }
-
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match.";
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle form submission
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
-
     if (validateForm()) {
-      // Simulate API call for creating profile
       setTimeout(() => {
         setSuccessMessage("Profile created successfully!");
-        navigate("/profile"); // Redirect to profile page
+        navigate("/profile");
       }, 1000);
     }
   };
 
   return (
-    <div className="bg-neutral-950 text-white min-h-screen flex justify-center items-center p-6">
-      <div className="w-full max-w-4xl bg-neutral-900 p-8 rounded-lg shadow-lg backdrop-blur-md bg-opacity-50">
-        <h2 className="text-2xl font-bold mb-6">Create Your Profile</h2>
+    <div className="bg-neutral-950 text-white min-h-screen flex justify-center items-start p-6">
+      <div className="w-full max-w-3xl bg-neutral-900 rounded-xl shadow-lg p-8">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold mb-2">Create Your Profile</h1>
+          <p className="text-neutral-400">
+            Fill in your details to get started
+          </p>
+        </div>
 
-        {/* Success Message */}
         {successMessage && (
-          <div className="bg-green-500 text-white p-4 rounded-md mb-6 flex items-center space-x-2">
+          <div className="bg-green-600 text-white p-4 rounded-lg mb-6 flex items-center justify-center space-x-2">
             <Check size={20} />
             <span>{successMessage}</span>
           </div>
         )}
 
-        {/* Profile Creation Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Profile Picture Upload */}
-          <div className="flex items-center space-x-6">
-            <div className="relative">
+          {/* Profile Picture */}
+          <div className="flex flex-col items-center mb-6">
+            <div className="relative group">
               <img
                 src={formData.profilePicture}
                 alt="Profile"
-                className="w-24 h-24 border-2 rounded-full object-cover"
+                className="w-24 h-24 rounded-full object-cover border-4 border-neutral-700 group-hover:border-blue-500 transition-all"
               />
               <label
                 htmlFor="profilePicture"
-                className="absolute bottom-0 right-0 bg-blue-600 p-2 rounded-full hover:bg-blue-500 transition cursor-pointer"
+                className="absolute bottom-0 right-0 bg-blue-600 p-2 rounded-full hover:bg-blue-500 transition cursor-pointer shadow-lg flex items-center justify-center w-8 h-8"
               >
-                <Edit2 size={16} className="text-white" />
+                <Plus size={16} className="text-white" />
                 <input
                   type="file"
                   id="profilePicture"
@@ -163,226 +168,195 @@ const CreateProfile: FC = () => {
                 />
               </label>
             </div>
-            <div>
-              <h3 className="text-xl font-bold">Upload Profile Picture</h3>
-              <p className="text-neutral-400">Click the icon to upload a photo.</p>
-            </div>
           </div>
 
-          {/* Full Name */}
-          <FormField
-            icon={<User size={20} />}
-            type="text"
-            name="fullName"
-            label="Full Name"
-            placeholder="Enter your full name"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            error={errors.fullName}
-          />
+          {/* Basic Information */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <FormField
+              icon={<User size={20} className="text-blue-400" />}
+              type="text"
+              name="fullName"
+              label="Full Name"
+              placeholder="John Doe"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              error={errors.fullName}
+            />
+            <FormField
+              icon={<User size={20} className="text-blue-400" />}
+              type="text"
+              name="username"
+              label="Username"
+              placeholder="johndoe123"
+              value={formData.username}
+              onChange={handleInputChange}
+              error={errors.username}
+            />
+            <FormField
+              icon={<Mail size={20} className="text-blue-400" />}
+              type="email"
+              name="email"
+              label="Email"
+              placeholder="john@example.com"
+              value={formData.email}
+              onChange={handleInputChange}
+              error={errors.email}
+            />
+            <FormField
+              icon={<Lock size={20} className="text-blue-400" />}
+              type="password"
+              name="password"
+              label="Password"
+              placeholder="••••••••"
+              value={formData.password}
+              onChange={handleInputChange}
+              error={errors.password}
+            />
+            <FormField
+              icon={<Lock size={20} className="text-blue-400" />}
+              type="password"
+              name="confirmPassword"
+              label="Confirm Password"
+              placeholder="••••••••"
+              value={formData.confirmPassword}
+              onChange={handleInputChange}
+              error={errors.confirmPassword}
+            />
+          </div>
 
-          {/* Username */}
-          <FormField
-            icon={<User size={20} />}
-            type="text"
-            name="username"
-            label="Username"
-            placeholder="Enter your username"
-            value={formData.username}
-            onChange={handleInputChange}
-            error={errors.username}
-          />
+          {/* Personal Information */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <FormField
+              icon={<Phone size={20} className="text-blue-400" />}
+              type="tel"
+              name="phone"
+              label="Phone Number"
+              placeholder="+1 (123) 456-7890"
+              value={formData.phone}
+              onChange={handleInputChange}
+            />
+            <FormField
+              icon={<Calendar size={20} className="text-blue-400" />}
+              type="date"
+              name="dateOfBirth"
+              label="Date of Birth"
+              value={formData.dateOfBirth}
+              onChange={handleInputChange}
+            />
+            <FormField
+              icon={<User size={20} className="text-blue-400" />}
+              type="select"
+              name="gender"
+              label="Gender"
+              value={formData.gender}
+              onChange={handleInputChange}
+              options={[
+                { value: "", label: "Select Gender" },
+                { value: "male", label: "Male" },
+                { value: "female", label: "Female" },
+                { value: "other", label: "Other" },
+              ]}
+            />
+            <FormField
+              icon={<MapPin size={20} className="text-blue-400" />}
+              type="text"
+              name="address"
+              label="Address"
+              placeholder="123 Main St, City"
+              value={formData.address}
+              onChange={handleInputChange}
+            />
+          </div>
 
-          {/* Email */}
-          <FormField
-            icon={<Mail size={20} />}
-            type="email"
-            name="email"
-            label="Email"
-            placeholder="Enter your email"
-            value={formData.email}
-            onChange={handleInputChange}
-            error={errors.email}
-          />
-
-          {/* Password */}
-          <FormField
-            icon={<Lock size={20} />}
-            type="password"
-            name="password"
-            label="Password"
-            placeholder="Enter your password"
-            value={formData.password}
-            onChange={handleInputChange}
-            error={errors.password}
-          />
-
-          {/* Confirm Password */}
-          <FormField
-            icon={<Lock size={20} />}
-            type="password"
-            name="confirmPassword"
-            label="Confirm Password"
-            placeholder="Confirm your password"
-            value={formData.confirmPassword}
-            onChange={handleInputChange}
-            error={errors.confirmPassword}
-          />
+          {/* Professional Information */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <FormField
+              icon={<Briefcase size={20} className="text-blue-400" />}
+              type="text"
+              name="jobTitle"
+              label="Job Title"
+              placeholder="Software Engineer"
+              value={formData.jobTitle}
+              onChange={handleInputChange}
+            />
+            <FormField
+              icon={<Briefcase size={20} className="text-blue-400" />}
+              type="text"
+              name="company"
+              label="Company"
+              placeholder="Tech Corp Inc."
+              value={formData.company}
+              onChange={handleInputChange}
+            />
+            <FormField
+              icon={<Briefcase size={20} className="text-blue-400" />}
+              type="text"
+              name="industry"
+              label="Industry"
+              placeholder="Information Technology"
+              value={formData.industry}
+              onChange={handleInputChange}
+            />
+            <FormField
+              icon={<Briefcase size={20} className="text-blue-400" />}
+              type="text"
+              name="skills"
+              label="Skills"
+              placeholder="JavaScript, React, Node.js"
+              value={formData.skills}
+              onChange={handleInputChange}
+            />
+          </div>
 
           {/* Bio */}
           <FormField
-            icon={<Info size={20} />}
+            icon={<Info size={20} className="text-blue-400" />}
             type="textarea"
             name="bio"
             label="Bio"
-            placeholder="Tell us about yourself"
+            placeholder="Tell us about yourself..."
             value={formData.bio}
             onChange={handleInputChange}
           />
 
-          {/* Phone Number */}
-          <FormField
-            icon={<Phone size={20} />}
-            type="tel"
-            name="phone"
-            label="Phone Number"
-            placeholder="Enter your phone number"
-            value={formData.phone}
-            onChange={handleInputChange}
-          />
-
-          {/* Date of Birth */}
-          <FormField
-            icon={<Calendar size={20} />}
-            type="date"
-            name="dateOfBirth"
-            label="Date of Birth"
-            placeholder="Select your date of birth"
-            value={formData.dateOfBirth}
-            onChange={handleInputChange}
-          />
-
-          {/* Gender */}
-          <FormField
-            icon={<User size={20} />}
-            type="select"
-            name="gender"
-            label="Gender"
-            placeholder="Select your gender"
-            value={formData.gender}
-            onChange={handleInputChange}
-            options={[
-              { value: "", label: "Select Gender" },
-              { value: "male", label: "Male" },
-              { value: "female", label: "Female" },
-              { value: "other", label: "Other" },
-            ]}
-          />
-
-          {/* Address */}
-          <FormField
-            icon={<MapPin size={20} />}
-            type="text"
-            name="address"
-            label="Address"
-            placeholder="Enter your address"
-            value={formData.address}
-            onChange={handleInputChange}
-          />
-
-          {/* Job Title */}
-          <FormField
-            icon={<Briefcase size={20} />}
-            type="text"
-            name="jobTitle"
-            label="Job Title"
-            placeholder="Enter your job title"
-            value={formData.jobTitle}
-            onChange={handleInputChange}
-          />
-
-          {/* Company */}
-          <FormField
-            icon={<Briefcase size={20} />}
-            type="text"
-            name="company"
-            label="Company"
-            placeholder="Enter your company name"
-            value={formData.company}
-            onChange={handleInputChange}
-          />
-
-          {/* Industry */}
-          <FormField
-            icon={<Briefcase size={20} />}
-            type="text"
-            name="industry"
-            label="Industry"
-            placeholder="Enter your industry"
-            value={formData.industry}
-            onChange={handleInputChange}
-          />
-
-          {/* Skills */}
-          <FormField
-            icon={<Briefcase size={20} />}
-            type="text"
-            name="skills"
-            label="Skills"
-            placeholder="Enter your skills (comma separated)"
-            value={formData.skills}
-            onChange={handleInputChange}
-          />
-
-          {/* Social Media Links */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold">Social Media Links</h3>
+          {/* Social Media */}
+          <div className="grid md:grid-cols-2 gap-6">
             <FormField
-              icon={<Linkedin size={20} />}
+              icon={<Linkedin size={20} className="text-blue-400" />}
               type="text"
               name="linkedin"
-              label="LinkedIn Profile"
-              placeholder="Enter your LinkedIn profile URL"
+              label="LinkedIn"
+              placeholder="linkedin.com/in/username"
               value={formData.linkedin}
               onChange={handleInputChange}
             />
             <FormField
-              icon={<Twitter size={20} />}
+              icon={<Twitter size={20} className="text-blue-400" />}
               type="text"
               name="twitter"
-              label="Twitter Profile"
-              placeholder="Enter your Twitter profile URL"
+              label="Twitter"
+              placeholder="twitter.com/username"
               value={formData.twitter}
               onChange={handleInputChange}
             />
             <FormField
-              icon={<Github size={20} />}
+              icon={<Github size={20} className="text-blue-400" />}
               type="text"
               name="github"
-              label="GitHub Profile"
-              placeholder="Enter your GitHub profile URL"
+              label="GitHub"
+              placeholder="github.com/username"
               value={formData.github}
               onChange={handleInputChange}
             />
           </div>
 
-          {/* Preferences */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold">Preferences</h3>
+          {/* Privacy Settings */}
+          <div className="grid md:grid-cols-2 gap-6">
             <FormField
-              icon={<Bell size={20} />}
-              type="checkbox"
-              name="notificationsEnabled"
-              label="Enable Notifications"
-              checked={formData.notificationsEnabled}
-              onChange={handleInputChange}
-            />
-            <FormField
-              icon={<Shield size={20} />}
+              icon={<Shield size={20} className="text-blue-400" />}
               type="select"
               name="privacySettings"
               label="Privacy Settings"
-              placeholder="Select privacy settings"
               value={formData.privacySettings}
               onChange={handleInputChange}
               options={[
@@ -392,18 +366,18 @@ const CreateProfile: FC = () => {
             />
           </div>
 
-          {/* Buttons */}
-          <div className="flex space-x-4">
+          {/* Form Actions */}
+          <div className="flex space-x-4 pt-4">
             <button
               type="button"
               onClick={() => navigate("/")}
-              className="w-full bg-neutral-700 text-white p-3 rounded-md hover:bg-neutral-600 transition"
+              className="flex-1 bg-neutral-700 text-white py-3 rounded-lg hover:bg-neutral-600 transition"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-500 transition"
+              className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-500 transition"
             >
               Save Profile
             </button>
@@ -414,73 +388,71 @@ const CreateProfile: FC = () => {
   );
 };
 
-// Reusable Form Field Component
 const FormField: FC<{
   icon: JSX.Element;
   type: string;
   name: string;
   label: string;
-  placeholder: string;
+  placeholder?: string;
   value: string | boolean;
-  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
+  onChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => void;
   error?: string;
   options?: { value: string; label: string }[];
-}> = ({ icon, type, name, label, placeholder, value, onChange, error, options }) => (
-  <div className="relative">
-    <label className="block text-sm font-medium mb-2">{label}</label>
-    <div className="flex items-center space-x-3">
-      <div className="text-neutral-400">{icon}</div>
-      {type === "textarea" ? (
-        <textarea
-          name={name}
-          value={value as string}
-          onChange={onChange}
-          className={`w-full bg-neutral-800 text-white p-3 rounded-md focus:outline-none focus:ring-2 ${
-            error ? "focus:ring-red-500" : "focus:ring-blue-500"
-          }`}
-          placeholder={placeholder}
-          rows={4}
-        />
-      ) : type === "select" ? (
-        <select
-          name={name}
-          value={value as string}
-          onChange={onChange}
-          className={`w-full bg-neutral-800 text-white p-3 rounded-md focus:outline-none focus:ring-2 ${
-            error ? "focus:ring-red-500" : "focus:ring-blue-500"
-          }`}
-        >
-          {options?.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      ) : type === "checkbox" ? (
-        <div className="flex items-center space-x-3">
-          <input
-            type="checkbox"
-            name={name}
-            checked={value as boolean}
-            onChange={onChange}
-            className="w-5 h-5 rounded-md focus:ring-2 focus:ring-blue-500"
-          />
-          <span className="text-neutral-400">{label}</span>
-        </div>
-      ) : (
-        <input
-          type={type}
-          name={name}
-          value={value as string}
-          onChange={onChange}
-          className={`w-full bg-neutral-800 text-white p-3 rounded-md focus:outline-none focus:ring-2 ${
-            error ? "focus:ring-red-500" : "focus:ring-blue-500"
-          }`}
-          placeholder={placeholder}
-        />
-      )}
-    </div>
-    {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+}> = ({
+  icon,
+  type,
+  name,
+  label,
+  placeholder,
+  value,
+  onChange,
+  error,
+  options,
+}) => (
+  <div className="space-y-2">
+    <label className="flex items-center space-x-2 text-neutral-300">
+      {icon}
+      <span>{label}</span>
+    </label>
+
+    {type === "textarea" ? (
+      <textarea
+        name={name}
+        value={value as string}
+        onChange={onChange}
+        className="w-full bg-neutral-800 text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        placeholder={placeholder}
+        rows={4}
+      />
+    ) : type === "select" ? (
+      <select
+        name={name}
+        value={value as string}
+        onChange={onChange}
+        className="w-full bg-neutral-800 text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+      >
+        {options?.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    ) : (
+      <input
+        type={type}
+        name={name}
+        value={value as string}
+        onChange={onChange}
+        className={`w-full bg-neutral-800 text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+          error ? "border border-red-500" : ""
+        }`}
+        placeholder={placeholder}
+      />
+    )}
+
+    {error && <p className="text-red-500 text-sm">{error}</p>}
   </div>
 );
 
