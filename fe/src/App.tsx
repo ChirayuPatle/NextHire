@@ -31,6 +31,7 @@ import Registration from "./pages/registration";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import CandidateRegistration from "./pages/CandidateRegistration";
 import OrganizationRegistration from "./pages/OrganizationRegistration";
+import ChatApp from "./pages/chat";
 
 const Feedback = lazy(() => import("./pages/feedback"));
 
@@ -87,6 +88,7 @@ function App() {
         <Route path="/location" element={<LocationSettings />} />
         <Route path="/create-profile" element={<CreateProfile />} />
         <Route path="/view-profile" element={<UserProfileCard />} />
+        <Route path="/chat" element={<ChatApp />} />
 
         {/* User pages */}
         <Route path="/user" element={<UserLayout />}>

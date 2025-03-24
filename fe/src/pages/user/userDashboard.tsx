@@ -249,7 +249,6 @@ export const CandidateDashboard = () => {
         <Card className="relative overflow-hidden border border-[#5a5959]">
           <div className="absolute top-0 right-0 w-24 h-24 -mt-10 -mr-10 bg-[#B967FF]/10 rounded-full"></div>
           <div className="absolute top-0 right-0 w-16 h-16 -mt-4 -mr-4 bg-[#B967FF]/20 rounded-full"></div>
-
           <div className="relative z-10">
             <div className="p-3 rounded-full bg-[#B967FF]/20 w-fit mb-4">
               <User className="h-6 w-6 text-[#B967FF]" />

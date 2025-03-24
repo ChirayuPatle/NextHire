@@ -1,6 +1,7 @@
 import { useState, FC, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Lock, Mail, User, Edit2, Check, X, Shield, Bell, Key, LifeBuoy } from "lucide-react";
+import { JSX } from "react/jsx-runtime";
 
 // Define types for profile data
 interface Profile {
@@ -171,7 +172,7 @@ const ProfileCard: FC<{ profile: Profile; onEditClick: () => void }> = ({ profil
         <img
           src={profile.profilePicture}
           alt="Profile"
-          className="w-24 h-24 rounded-full object-cover"
+          className="w-24 h-24 rounded-full object-cover border-2"
         />
         <button
           onClick={onEditClick}

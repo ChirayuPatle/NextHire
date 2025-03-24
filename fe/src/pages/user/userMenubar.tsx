@@ -49,9 +49,8 @@ const UserMenubar: React.FC = () => {
         <div className="space-y-4">
           {/* Profile Image */}
           <Link to={'/aichat'}>
-          <div className="flex flex-col items-center space-y-2">
-            <img src={chat} alt="Profile" className="w-16 h-16" />
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition">Next AI</button>
+          <div className="flex flex-col space-y-2">
+            <img src={chat} alt="Profile" className="w-12 h-12" />
           </div>
           </Link>
           

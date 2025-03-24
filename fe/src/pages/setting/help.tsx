@@ -65,15 +65,15 @@ const HelpPage = () => {
         <div className="mt-4 space-y-3">
           <div className="flex items-center space-x-3">
             <Phone className="text-blue-500" size={20} />
-            <span>+1 234 567 890</span>
+            <span>+91 93736 90752</span>
           </div>
           <div className="flex items-center space-x-3">
             <Mail className="text-blue-500" size={20} />
-            <span>support@next-hire.com</span>
+            <span>priyanshukayarkar2@gmail.com</span>
           </div>
           <div className="flex items-center space-x-3">
             <MapPin className="text-blue-500" size={20} />
-            <span>1234 AI Street, Tech City, USA</span>
+            <span>Pachgao AI Street, Tech City, USA</span>
           </div>
         </div>
       </div>
